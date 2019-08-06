@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // $(function () {
 
 //     function initMap() {
@@ -58,3 +59,28 @@ function initMap() {
 //     map: map,
 //     icon: "assets/images/marker.png"
 // });
+=======
+var map;
+
+function initMap() {
+    map = new google.maps.Map(document.getElementById('map'), {
+        center: {
+            lat: 40.7549,
+            lng: -73.9840
+        },
+        zoom: 8
+    });
+}
+
+
+            // var pinLocation = new google.maps.LatLng(40.7536, -73.9832);
+
+            // var startPosition = new google.maps.Marker({
+            //     position: pinLocation,
+            //     map: map,
+            //     icon: "img/go.png"
+
+            // });
+            // 40.7549° N, 73.9840° W
+            // 40.7536, -73.9832//
+>>>>>>> 8023dbb7fafe678cd54e69f5523995c138e62193

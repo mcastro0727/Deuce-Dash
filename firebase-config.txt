@@ -1,8 +1,42 @@
+  // create button div (id=add-location) to add new location
+  // create form for new locations (id=street-number-input; id=street-name-input)
+  // make a table for adding locations <tr>
+
+
 var config = {
     apiKey: "AIzaSyAn5NoP9LgIzSdhe8-H_zmBhAUOxWz7Huc",
     authDomain: "deuce-dash.firebaseapp.com",
     databaseURL: "https://deuce-dash.firebaseio.com",
     storageBucket: "deuce-dash.appspot.com"
-  };
-  
-  firebase.initializeApp(config);
+};
+
+firebase.initializeApp(config);
+
+var database = firebase.database();
+
+
+$("#add-location").on("click", function (event) {
+            var streetNumber = ("#street-number-input").val().trim();
+            var streetName = ("#street-name-input").val().trim()
+
+
+            var newLocation = {
+                number: streetNumber,
+                name: streetName
+            };
+
+            database.ref().push(newLocation);
+
+            $("#street-number-input").val("");
+            $("#street-name-input").val("");
+
+            });
+
+            database.ref().on("child_added", function (childSnapshot) {
+                var streetNumber = childSnapshot.val().number;
+                var streetName = childSnapshot.val().name;
+            }
+
+            var newRow = $('<tr>').append(
+              $("<td>").text(streetNumber, streetNumber)
+            );
