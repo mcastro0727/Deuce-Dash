@@ -1,23 +1,3 @@
-<<<<<<< HEAD
-// $(function () {
-
-//     function initMap() {
-
-//         var location = new google.maps.LatLng(40.7549, -73.9840);
-
-//         var mapCanvas = document.getElementById('map');
-//         var mapOptions = {
-//             center: location,
-//             zoom: 8,
-//             panControl: false,
-//             mapTypeId: google.maps.MapTypeId.ROADMAP
-//         }
-//         var map = new google.maps.Map(mapCanvas, mapOptions);
-//     }
-//     google.maps.venet.addDomListener(window, 'load', initMap);
-// });
-
-
 function initMap() {
     var myLatLng = {lat: 40.782710, lng: -73.965310};
     var map = new google.maps.Map(document.getElementById('map'), {
@@ -33,54 +13,34 @@ function initMap() {
 
 
 
-// function initMap() {
-//     var mapOptions = {
-//         center: {
-//             lat: 40.7549, lng: -73.9840
+// var locations = [
+//       ['Bondi Beach', -33.890542, 151.274856, 4],
+//       ['Coogee Beach', -33.923036, 151.259052, 5],
+//       ['Cronulla Beach', -34.028249, 151.157507, 3],
+//       ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
+//       ['Maroubra Beach', -33.950198, 151.259302, 1]
+//     ];
 
-//         },
-//         zoom: 8,
-//     };
-//     var map;
-//     map = new google.maps.Map(document.getElementById('map'), mapOptions);
+//     var map = new google.maps.Map(document.getElementById('map'), {
+//       zoom: 10,
+//       center: new google.maps.LatLng(-33.92, 151.25),
+//       mapTypeId: google.maps.MapTypeId.ROADMAP
+//     });
 
-//     var marker = new google.maps.Marker({
-//         position: myLatLng,
-//         map: map,
-// });
+//     var infowindow = new google.maps.InfoWindow();
 
+//     var marker, i;
 
+//     for (i = 0; i < locations.length; i++) {  
+//       marker = new google.maps.Marker({
+//         position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+//         map: map
+//       });
 
-
-// var pinLocation = new.google.maps.LatLng(40.782710,-73.965310);
-
-// var startPosition = new.google.maps.Marker({
-//     position: pinLocation,
-//     map: map,
-//     icon: "assets/images/marker.png"
-// });
-=======
-var map;
-
-function initMap() {
-    map = new google.maps.Map(document.getElementById('map'), {
-        center: {
-            lat: 40.7549,
-            lng: -73.9840
-        },
-        zoom: 8
-    });
-}
-
-
-            // var pinLocation = new google.maps.LatLng(40.7536, -73.9832);
-
-            // var startPosition = new google.maps.Marker({
-            //     position: pinLocation,
-            //     map: map,
-            //     icon: "img/go.png"
-
-            // });
-            // 40.7549° N, 73.9840° W
-            // 40.7536, -73.9832//
->>>>>>> 8023dbb7fafe678cd54e69f5523995c138e62193
+//       google.maps.event.addListener(marker, 'click', (function(marker, i) {
+//         return function() {
+//           infowindow.setContent(locations[i][0]);
+//           infowindow.open(map, marker);
+//         }
+//       })(marker, i));
+//     }
