@@ -1,9 +1,100 @@
+#map {
+  position: fixed;
+  top: 156px;
+  left: 200px;
+  bottom: 0;
+  height: 84vh;
+}
 
-      #map {
-        height: 100%;
-      }
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
+#title{
+  font-family: foobar;
+  font-weight: bold;
+  font-size: 5em;
+  display: inline;
+  margin-top: 20px;
+}
+
+.title-icon{
+  display: inline;
+}
+
+#overline{
+  border-top: 2px solid lightgreen;
+  padding-top: 5px;
+}
+
+#tagline{
+  font-size: 1.5em;
+}
+
+#nav-title{
+  text-align: center;
+  color: white;
+  border-bottom: 2px solid lightgreen;
+  padding-bottom: 10px;
+}
+
+.icon{
+  padding-right: 5px;
+}
+
+header{
+  text-align: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  overflow: hidden;
+  z-index: 2000;
+  background: white;
+  display: block;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+}
+
+body{
+  font-family: Open Sans, Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+nav{
+  position: fixed;
+  z-index: 1000;
+  top: 176.859px;
+  bottom: 0;
+  width: 200px;
+  background-color: black;
+}
+
+nav ul{
+  list-style: none;
+  margin-top: 18px;
+  text-align: left;
+}
+
+nav a:hover{
+  background: lightgreen;
+  text-decoration: none;
+  color: black
+}
+
+nav ul li a{
+  text-decoration: none;
+  display: block;
+  color: white;
+  padding: 10px 0 10px 20px;
+}
+
+
+@font-face {
+  font-family: foobar;
+  src: url(FoobarProRegular.otf);
+} 
