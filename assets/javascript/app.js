@@ -1,4 +1,3 @@
-
 var myMap
 
 function initMap() {
@@ -55,6 +54,3 @@ $(document).ready(function(){
   convertLocation("106+11th+Street,+Hoboken,+NJ")
 
 })
-
-
-
