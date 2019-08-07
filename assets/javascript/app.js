@@ -1,3 +1,5 @@
+var myMap
+
 function initMap() {
   var myLatLng = {lat: 40.782710, lng: -73.965310};
 
@@ -6,25 +8,50 @@ function initMap() {
     center: myLatLng
   });
 
+  myMap = map
+
   var marker = new google.maps.Marker({
     position: myLatLng,
     map: map,
-    // title: 'Hello World!'
   });
+
 }
 
-var latlng = new google.maps.LatLng(40.782710, -73.965310);
+$(document).ready(function(){
 
-function addmarker(latilongi) {
-    var marker = new google.maps.Marker({
-        position: latilongi,
-        title: 'new marker',
-        draggable: true,
-        map: map
-    });
-    map.setCenter(marker.getPosition())
-}
+  var coord1 = new google.maps.LatLng(40.716180,-73.997490)
+  addMarker(coord1)
+  var coord2 = new google.maps.LatLng(40.721330,-74.012340)
+  addMarker(coord2)
+  var coord3 = new google.maps.LatLng(40.716290,-73.983770)
+  addMarker(coord3)
+  var coord4 = new google.maps.LatLng(40.756770,-73.970790)
+  addMarker(coord4)
+  var coord5 = new google.maps.LatLng(40.764910,-73.985110)
+  addMarker(coord5)
 
-$('#btnaddmarker').on('click', function() {
-    addmarker(latlng)
+  function addMarker(coordinates){
+    var marker = new google.maps.Marker({ 
+      position: coordinates,
+      map: myMap, 
+      title: this.LocationName 
+    }); 
+  }
+
+  function convertLocation(){
+  var queryURL = "https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=AIzaSyCkioyz1epNmUDEt2m_AnGPVYsD89b-E3g"
+    $.ajax({
+      url: queryURL,
+      method: "GET"
+    }).then(function(response){
+      // var lat = response.results[0].geometry.location.lat
+      // var lng = response.results[0].geometry.location.lng
+      console.log(response)
+      // console.log(lng)
+    })
+  }
+  convertLocation()
+
 })
+
+
