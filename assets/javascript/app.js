@@ -38,19 +38,20 @@ $(document).ready(function(){
     }); 
   }
 
-  function convertLocation(){
-  var queryURL = "https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=AIzaSyCkioyz1epNmUDEt2m_AnGPVYsD89b-E3g"
+  function convertLocation(location){
+  var queryURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + location + "&key=AIzaSyCkioyz1epNmUDEt2m_AnGPVYsD89b-E3g"
     $.ajax({
       url: queryURL,
       method: "GET"
     }).then(function(response){
-      // var lat = response.results[0].geometry.location.lat
-      // var lng = response.results[0].geometry.location.lng
-      console.log(response)
+      var lat = response.results[0].geometry.location.lat
+      var lng = response.results[0].geometry.location.lng
+      var coord = new google.maps.LatLng(lat, lng)
+      addMarker(coord)
       // console.log(lng)
     })
   }
-  convertLocation()
+  convertLocation("106+11th+Street,+Hoboken,+NJ")
 
 })
 
