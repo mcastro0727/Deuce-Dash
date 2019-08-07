@@ -52,8 +52,16 @@ $(document).ready(function(){
       // console.log(lng)
     })
   }
-  convertLocation("106+11th+Street,+Hoboken,+NJ")
+  convertLocation(addPlus("263 Mountain Way, Rutherford, NJ"))
 
+  function addPlus(string){
+    stringArray = string.split(" ")
+    var stringPlus = stringArray[0]
+    for(i=1; i<stringArray.length; i++){
+      stringPlus = stringPlus + "+" + stringArray[i]
+    }
+    return(stringPlus)
+  }
 })
 
 
