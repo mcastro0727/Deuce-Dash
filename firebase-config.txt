@@ -40,3 +40,34 @@ $("#add-location").on("click", function (event) {
             var newRow = $('<tr>').append(
               $("<td>").text(streetNumber, streetNumber)
             );
+
+
+
+// FOR THE FORM
+<form id="add-location">
+  <div id="#street-number-input">
+    <label for="streetNumber">Street Number</label>
+    <input type="text" class="form-control" id="streetNumber" aria-describedby="streetnumber" placeholder="Enter Street Number">
+  </div>
+  <div id="#street-name-input">
+    <label for="streetName">StreetName</label>
+    <input type="text" class="form-control" id="streetNumber" placeholder="Enter Street Number">
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+
+
+var streetNumber
+
+var queryURL = https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,
++Mountain+View,+CA&key=YOUR_API_KEY
+
+$.ajax({
+  url: queryURL,
+  method: "GET"
+})
+
+.then(function(response){
+
+})
