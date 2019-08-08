@@ -19,12 +19,6 @@
     <!-- GeoFire Database -->
     <script src="https://cdn.firebase.com/libs/geofire/5.0.1/geofire.min.js"></script>
 
-
-<<<<<<< HEAD
-=======
-
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
->>>>>>> bda58e952ccb4aa6ebc961cb032383de2f936a43
 </head>
 
 <body>
@@ -41,46 +35,19 @@
             <li><a href="#"><img src="assets/images/toilet.png" class="icon">Find a Restroom</a></li>
             <li><a href="#"><img src="assets/images/newspaper.png" class="icon">Reading Material</a></li>
             <li><a href="#"><img src="assets/images/journal.png" class="icon">Bathroom Log</a></li>
-<<<<<<< HEAD
-            <li><a href="#"><img src="assets/images/plus.jpg" class="icon">Add A Location</a></li>
-=======
             <li><a href="#" id="add-button"><img src="assets/images/journal.png" class="icon">Add Location</a></li>
->>>>>>> bda58e952ccb4aa6ebc961cb032383de2f936a43
         </ul>
     </nav>
 
-
-
-<<<<<<< HEAD
-    <form id="add-location">
-        <div id="#street-number-input">
-          <label for="streetNumber">Street Number</label>
-          <input type="text" class="form-control" id="streetNumber" aria-describedby="streetnumber" placeholder="Enter Street Number">
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span>Address: <input id="address-input" type="text"></span>
+            <span id="buttons">
+                <input class="button" id="cancel" type="submit" value="Cancel">
+                <input class="button" id="submit" type="submit" value="Submit">
+            </span>
         </div>
-        <div id="#street-name-input">
-          <label for="streetName">Street Name</label>
-          <input type="text" class="form-control" id="streetNumber" placeholder="Enter Street Name">
-        </div>
-        <div id="#city-input">
-            <label for="city">City</label>
-            <input type="text" class="form-control" id="city" placeholder="Enter City">
-          </div>
-  
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-=======
-        <div id="modal" class="modal">
-            <div class="modal-content">
-                <span>Address: <input id="address-input" type="text"></span>
-                <span id="buttons">
-                    <input class="button" id="cancel" type="submit" value="Cancel">
-                    <input class="button" id="submit" type="submit" value="Submit">
-                </span>
-            </div>
-        </div>
-    <div id="map">
     </div>
->>>>>>> bda58e952ccb4aa6ebc961cb032383de2f936a43
 
 
 
@@ -88,9 +55,6 @@
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkioyz1epNmUDEt2m_AnGPVYsD89b-E3g&callback=initMap"
         async defer></script>
-
-
-
 
 </body>
 
