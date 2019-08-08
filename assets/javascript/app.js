@@ -45,6 +45,7 @@ $(document).ready(function(){
       url: queryURL,
       method: "GET"
     }).then(function(response){
+      console.log(response)
       var lat = response.results[0].geometry.location.lat
       var lng = response.results[0].geometry.location.lng
       var coord = new google.maps.LatLng(lat, lng)
@@ -62,7 +63,42 @@ $(document).ready(function(){
     }
     return(stringPlus)
   }
+
+
+  var modal = document.getElementById("modal");
+
+  var btn = document.getElementById("myBtn");
+
+  var span = document.getElementsByClassName("close")[0];
+
+  $("#add-button").on("click", function() {
+    $(".modal").css("display","block")
+    
+    $("#submit").on("click", function(){
+      convertLocation(addPlus($("#address-input").val()))
+      $("#address-input").val("")
+
+    })
+    $("#cancel").on("click", function(){
+      
+      $("#address-input").val("")
+
+    })
+  })
+
+  $(".button").on("click", function() {
+    modal.style.display = "none";
+  })
+
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
 })
+
+
+
 
 
 

@@ -11,7 +11,6 @@
   font-weight: bold;
   font-size: 5em;
   display: inline;
-  margin-top: 20px;
 }
 
 .title-icon{
@@ -32,6 +31,21 @@
   color: white;
   border-bottom: 2px solid lightgreen;
   padding-bottom: 10px;
+}
+
+#address-input{
+  width: 70%;
+}
+
+#cancel, #submit{
+  width: 60px;
+}
+
+.button{
+ float: left;
+ margin: 10px 2px 0 2px;
+ position: relative;
+ left: 55%;
 }
 
 .icon{
@@ -93,12 +107,46 @@ nav ul li a{
   padding: 10px 0 10px 20px;
 }
 
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 10000; /* Sit on top */
+  left: 40%;
+  top: 40%;
+  width: 30%; /* Full width */
+  height: 10%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: grey; /* Fallback color */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  border: 1px solid #888;
+  width: 98%;
+  height: 98%;
+  vertical-align: top;
+  padding:3%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 
 @font-face {
   font-family: foobar;
   src: url(FoobarProRegular.otf);
-<<<<<<< HEAD
 } 
-=======
-}
->>>>>>> 29fc1ff08ed5bc6047a28aa9c28dfe33c8566064

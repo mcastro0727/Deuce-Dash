@@ -29,11 +29,22 @@
             <li><a href="#"><img src="assets/images/toilet.png" class="icon">Find a Restroom</a></li>
             <li><a href="#"><img src="assets/images/newspaper.png" class="icon">Reading Material</a></li>
             <li><a href="#"><img src="assets/images/journal.png" class="icon">Bathroom Log</a></li>
+            <li><a href="#" id="add-button"><img src="assets/images/journal.png" class="icon">Add Location</a></li>
         </ul>
     </nav>
 
 
-    <div id="map"></div>
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <span>Address: <input id="address-input" type="text"></span>
+                <span id="buttons">
+                    <input class="button" id="cancel" type="submit" value="Cancel">
+                    <input class="button" id="submit" type="submit" value="Submit">
+                </span>
+            </div>
+        </div>
+    <div id="map">
+    </div>
 
     <script>
         
