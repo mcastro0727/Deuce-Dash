@@ -1,20 +1,19 @@
-
 var myMap
 
 function initMap() {
-  var myLatLng = {lat: 40.782710, lng: -73.965310};
+    var myLatLng = { lat: 40.782710, lng: -73.965310 };
 
-  var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 12,
-    center: myLatLng
-  });
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 12,
+        center: myLatLng
+    });
 
-  myMap = map
+    myMap = map
 
-  var marker = new google.maps.Marker({
-    position: myLatLng,
-    map: map,
-  });
+    var marker = new google.maps.Marker({
+        position: myLatLng,
+        map: map,
+    });
 
 }
 
@@ -54,6 +53,7 @@ $(document).ready(function(){
     })
   }
   convertLocation(addPlus("263 Mountain Way, Rutherford, NJ"))
+
 
   function addPlus(string){
     stringArray = string.split(" ")
@@ -96,6 +96,8 @@ $(document).ready(function(){
     }
   }
 })
+
+
 
 
 
