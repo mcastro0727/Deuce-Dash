@@ -3,6 +3,7 @@
   // make a table for adding locations <tr>
 
 
+// FOR FIREBASE
 var config = {
     apiKey: "AIzaSyAn5NoP9LgIzSdhe8-H_zmBhAUOxWz7Huc",
     authDomain: "deuce-dash.firebaseapp.com",
@@ -40,3 +41,20 @@ $("#add-location").on("click", function (event) {
             var newRow = $('<tr>').append(
               $("<td>").text(streetNumber, streetNumber)
             );
+
+
+
+// FOR THE FORM
+<form id="add-location">
+  <div id="#street-number-input">
+    <label for="streetNumber">Street Number</label>
+    <input type="text" class="form-control" id="streetNumber" aria-describedby="streetnumber" placeholder="Enter Street Number">
+  </div>
+  <div id="#street-name-input">
+    <label for="streetName">StreetName</label>
+    <input type="text" class="form-control" id="streetNumber" placeholder="Enter Street Number">
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+
