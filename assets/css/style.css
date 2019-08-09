@@ -1,9 +1,10 @@
 #map {
-  position: fixed;
+  float: right;
   top: 156px;
   left: 200px;
   bottom: 0;
-  height: 84vh;
+  width: 1000px;
+  height: 400px;
 }
 
 #title{
@@ -50,6 +51,8 @@
 
 .icon{
   padding-right: 5px;
+  width: 30px;
+  height: 27px;
 }
 
 header{
@@ -111,9 +114,9 @@ nav ul li a{
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 10000; /* Sit on top */
-  left: 40%;
-  top: 40%;
-  width: 30%; /* Full width */
+  left: 75%;
+  top: 10%;
+  width: 20%; /* Full width */
   height: 10%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
   background-color: grey; /* Fallback color */
@@ -149,4 +152,6 @@ nav ul li a{
 @font-face {
   font-family: foobar;
   src: url(FoobarProRegular.otf);
+
 } 
+

@@ -3,6 +3,7 @@
   // make a table for adding locations <tr>
 
 
+// FOR FIREBASE
 var config = {
     apiKey: "AIzaSyAn5NoP9LgIzSdhe8-H_zmBhAUOxWz7Huc",
     authDomain: "deuce-dash.firebaseapp.com",
@@ -40,3 +41,25 @@ $("#add-location").on("click", function (event) {
             var newRow = $('<tr>').append(
               $("<td>").text(streetNumber, streetNumber)
             );
+
+
+
+// FOR THE FORM
+<form id="add-location">
+  <div id="#street-number-input">
+    <label for="streetNumber">Street Number</label>
+    <input type="text" class="form-control" id="streetNumber" aria-describedby="streetnumber" placeholder="Enter Street Number">
+  </div>
+  <div id="#street-name-input">
+    <label for="streetName">StreetName</label>
+    <input type="text" class="form-control" id="streetNumber" placeholder="Enter Street Number">
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+
+
+
+Spotify API : 975aed8cb15243fa83fa0534638a863c
+{"artists":{"href":"https://api.spotify.com/v1/search?query=tania+bowra\u0026offset=0\u0026limit=20\u0026type=artist","items":[{"external_urls":{"spotify":"https://open.spotify.com/artist/08td7MxkoHQkXnWAYD8d6Q"},"genres":[],"href":"https://api.spotify.com/v1/artists/08td7MxkoHQkXnWAYD8d6Q","id":"08td7MxkoHQkXnWAYD8d6Q","images":[{"height":640,"url":"https://i.scdn.co/image/f2798ddab0c7b76dc2d270b65c4f67ddef7f6718","width":640},{"height":300,"url":"https://i.scdn.co/image/b414091165ea0f4172089c2fc67bb35aa37cfc55","width":300},{"height":64,"url":"https://i.scdn.co/image/8522fc78be4bf4e83fea8e67bb742e7d3dfe21b4","width":64}],"name":"Tania Bowra","popularity":0,"type":"artist","uri":"spotify:artist:08td7MxkoHQkXnWAYD8d6Q"}],"limit":20,"next":null,"offset":0,"previous":null,"total":1}}
+

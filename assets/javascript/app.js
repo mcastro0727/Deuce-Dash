@@ -63,7 +63,6 @@ $(document).ready(function () {
       url: queryURL,
       method: "GET"
     }).then(function (response) {
-
       var lat = response.results[0].geometry.location.lat
       var lng = response.results[0].geometry.location.lng
       var coord = new google.maps.LatLng(lat, lng)
