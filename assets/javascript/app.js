@@ -3,7 +3,7 @@ var config = {
   authDomain: "deuce-dash.firebaseapp.com",
   databaseURL: "https://deuce-dash.firebaseio.com",
   storageBucket: "deuce-dash.appspot.com"
-};
+}
 
 firebase.initializeApp(config);
 
@@ -19,38 +19,42 @@ function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 12,
     center: myLatLng
-  });
+  })
 
   myMap = map
 
-  var marker = new google.maps.Marker({
-    position: myLatLng,
-    map: map,
-  });
 
 }
 
-$(document).ready(function() {
+$(document).ready(function () {
 
-
-  var coord1 = new google.maps.LatLng(40.716180, -73.997490)
-  addMarker(coord1)
-  var coord2 = new google.maps.LatLng(40.721330, -74.012340)
-  addMarker(coord2)
-  var coord3 = new google.maps.LatLng(40.716290, -73.983770)
-  addMarker(coord3)
-  var coord4 = new google.maps.LatLng(40.756770, -73.970790)
-  addMarker(coord4)
-  var coord5 = new google.maps.LatLng(40.764910, -73.985110)
-  addMarker(coord5)
-
+  database.ref().on("child_added", function (childSnapshot) {
+    var lat = childSnapshot.val().lat
+    var lng = childSnapshot.val().lng
+    var coord = new google.maps.LatLng(lat, lng)
+    addMarker(coord)
+  })
 
   function addMarker(coordinates) {
     var marker = new google.maps.Marker({
       position: coordinates,
       map: myMap,
-      title: this.LocationName
-    });
+      title: "address"
+    })
+    marker.addListener('click', function () {
+      if (myMap.getZoom() == 12) {
+        myMap.setZoom(15)
+        myMap.setCenter(marker.getPosition())
+      }
+      else if(myMap.getZoom() == 15){
+        myMap.setZoom(18)
+        myMap.setCenter(marker.getPosition())
+      }
+      else {
+        myMap.setZoom(12)
+        myMap.setCenter(marker.getPosition())
+      }
+    })
   }
 
   function convertLocation(location) {
@@ -59,16 +63,18 @@ $(document).ready(function() {
       url: queryURL,
       method: "GET"
     }).then(function (response) {
-      console.log(response)
       var lat = response.results[0].geometry.location.lat
       var lng = response.results[0].geometry.location.lng
       var coord = new google.maps.LatLng(lat, lng)
+
+      database.ref().push({
+        lat: lat,
+        lng: lng
+      })
+
       addMarker(coord)
-      // console.log(lng)
     })
   }
-  convertLocation(addPlus("263 Mountain Way, Rutherford, NJ"))
-
 
   function addPlus(string) {
     stringArray = string.split(" ")
@@ -79,11 +85,8 @@ $(document).ready(function() {
     return (stringPlus)
   }
 
-
   var modal = document.getElementById("modal");
-
   var btn = document.getElementById("myBtn");
-
   var span = document.getElementsByClassName("close")[0];
 
   $("#add-button").on("click", function () {
@@ -92,12 +95,10 @@ $(document).ready(function() {
     $("#submit").on("click", function () {
       convertLocation(addPlus($("#address-input").val()))
       $("#address-input").val("")
-
     })
+
     $("#cancel").on("click", function () {
-
       $("#address-input").val("")
-
     })
   })
 
@@ -110,4 +111,7 @@ $(document).ready(function() {
       modal.style.display = "none";
     }
   }
+
+
+
 })
