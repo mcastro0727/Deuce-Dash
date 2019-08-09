@@ -32,6 +32,7 @@ function initMap() {
 
 $(document).ready(function() {
 
+
   var coord1 = new google.maps.LatLng(40.716180, -73.997490)
   addMarker(coord1)
   var coord2 = new google.maps.LatLng(40.721330, -74.012340)

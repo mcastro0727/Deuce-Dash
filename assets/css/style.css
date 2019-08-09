@@ -1,9 +1,10 @@
 #map {
-  position: fixed;
+  float: right;
   top: 156px;
   left: 200px;
   bottom: 0;
-  height: 84vh;
+  width: 1000px;
+  height: 400px;
 }
 
 #title{
