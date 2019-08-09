@@ -31,15 +31,16 @@ $(document).ready(function () {
   database.ref().on("child_added", function (childSnapshot) {
     var lat = childSnapshot.val().lat
     var lng = childSnapshot.val().lng
+    var address = childSnapshot.val().address
     var coord = new google.maps.LatLng(lat, lng)
-    addMarker(coord)
+    addMarker(coord, address)
   })
 
-  function addMarker(coordinates) {
+  function addMarker(coordinates, address) {
     var marker = new google.maps.Marker({
       position: coordinates,
       map: myMap,
-      title: "address"
+      title: address
     })
     marker.addListener('click', function () {
       if (myMap.getZoom() == 12) {
@@ -57,7 +58,7 @@ $(document).ready(function () {
     })
   }
 
-  function convertLocation(location) {
+  function convertLocation(location, address) {
     var queryURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + location + "&key=AIzaSyCkioyz1epNmUDEt2m_AnGPVYsD89b-E3g"
     $.ajax({
       url: queryURL,
@@ -69,10 +70,11 @@ $(document).ready(function () {
 
       database.ref().push({
         lat: lat,
-        lng: lng
+        lng: lng,
+        address: address
       })
 
-      addMarker(coord)
+      addMarker(coord, address)
     })
   }
 
@@ -85,15 +87,20 @@ $(document).ready(function () {
     return (stringPlus)
   }
 
+  function capitalizeWords(str){
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+  }
+
   var modal = document.getElementById("modal");
   var btn = document.getElementById("myBtn");
   var span = document.getElementsByClassName("close")[0];
 
   $("#add-button").on("click", function () {
     $(".modal").css("display", "block")
+    $("#address-input").focus()
 
     $("#submit").on("click", function () {
-      convertLocation(addPlus($("#address-input").val()))
+      convertLocation(addPlus($("#address-input").val()), capitalizeWords($("#address-input").val()))
       $("#address-input").val("")
     })
 
@@ -103,7 +110,7 @@ $(document).ready(function () {
   })
 
   $(".button").on("click", function () {
-    modal.style.display = "none";
+    $("#modal").fadeOut()
   })
 
   window.onclick = function (event) {
@@ -111,7 +118,5 @@ $(document).ready(function () {
       modal.style.display = "none";
     }
   }
-
-
 
 })

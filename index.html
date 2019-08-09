@@ -22,19 +22,6 @@
     <!-- GeoFire Database -->
     <script src="https://cdn.firebase.com/libs/geofire/5.0.1/geofire.min.js"></script>
 
-<<<<<<< HEAD
-=======
-    <!-- jQuery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-    <!-- Firebase Core JavaScript Link -->
-    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
-    <!-- Specific Firebase products we want (Database) -->
-    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
-    <!-- GeoFire Database -->
-    <script src="https://cdn.firebase.com/libs/geofire/5.0.1/geofire.min.js"></script>
-
->>>>>>> 68afb12936595ae331c5294633146791ed00414f
 </head>
 
 <body>
@@ -55,7 +42,7 @@
         </ul>
     </nav>
 
-    <div id="modal" class="modal">
+    <!-- <div id="modal" class="modal">
         <div class="modal-content">
             <span>Address: <input id="address-input" type="text"></span>
             <span id="buttons">
@@ -63,21 +50,34 @@
                 <input class="button" id="submit" type="submit" value="Submit">
             </span>
         </div>
-    </div>
+    </div> -->
 
+
+<div id="modal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">New Location</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+        <span id="address-text">Address: <input id="address-input" type="text"></span>
+      <div class="modal-footer">
+        <button id="submit" type="button" class="button btn btn-primary">Add</button>
+        <button id="cancel" type="button" class="button btn btn-secondary" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
     <div id="map"></div>
 
+    <script src="assets/javascript/app.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkioyz1epNmUDEt2m_AnGPVYsD89b-E3g&callback=initMap"
         async defer></script>
-<<<<<<< HEAD
 
-    <script src="assets/javascript/app.js"></script>
-=======
-    <script src="assets/javascript/app.js"></script>
-
->>>>>>> 68afb12936595ae331c5294633146791ed00414f
 </body>
 
 </html>
