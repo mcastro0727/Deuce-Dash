@@ -113,9 +113,9 @@ nav ul li a{
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 10000; /* Sit on top */
-  left: 40%;
-  top: 40%;
-  width: 30%; /* Full width */
+  left: 75%;
+  top: 10%;
+  width: 20%; /* Full width */
   height: 10%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
   background-color: grey; /* Fallback color */
