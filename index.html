@@ -19,6 +19,8 @@
     <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
     <!-- Specific Firebase products we want (Database) -->
     <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.3.5/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-firestore.js"></script>
     <!-- GeoFire Database -->
     <script src="https://cdn.firebase.com/libs/geofire/5.0.1/geofire.min.js"></script>
 
@@ -39,9 +41,12 @@
             <li><a href="#"><img src="assets/images/newspaper.png" class="icon">Reading Material</a></li>
             <li><a href="#"><img src="assets/images/journal.png" class="icon">Bathroom Log</a></li>
             <li><a href="#" id="add-button"><img src="assets/images/plus.jpg" class="icon">Add Location</a></li>
+            <li><a href="#" id="login-link"><img src="assets/images/journal.png" class="icon">Log-in</a></li>
+
         </ul>
     </nav>
 
+    
     <!-- <div id="modal" class="modal">
         <div class="modal-content">
             <span>Address: <input id="address-input" type="text"></span>
@@ -53,7 +58,8 @@
     </div> -->
 
 
-<div id="modal" class="modal" tabindex="-1" role="dialog">
+
+<div id="add-modal" class="modal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -71,8 +77,24 @@
   </div>
 </div>
 
-
-    <div id="map"></div>
+    <div id="display">
+        <div id="map"></div>
+        <div id="form-border">
+            <form id="login-form" class="container">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email address</label>
+                    <input type="email" class="form-control" id="input-email" aria-describedby="emailHelp" placeholder="Enter email">
+                </div>
+                <div class="form-group">
+                    <label for="input-password">Password</label>
+                    <input type="password" class="form-control" id="input-password" placeholder="Password">
+                </div>
+                <button id="login-btn" type="submit" class="btn btn-primary button">Log in</button>
+                <button id="sign-up-btn" type="submit" class="btn btn-primary button">Sign Up</button>
+            </form>
+        </div>
+    </div>
+    
 
     <script src="assets/javascript/app.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkioyz1epNmUDEt2m_AnGPVYsD89b-E3g&callback=initMap"

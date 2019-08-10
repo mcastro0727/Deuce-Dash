@@ -1,10 +1,30 @@
-#map {
-  float: right;
-  top: 156px;
-  left: 200px;
+#display{
+  position: fixed;
+  top: 176.859px;
+  left: 23%;
   bottom: 0;
-  width: 1000px;
-  height: 400px;
+  width: 75%;
+  height: 80%;
+  border: 5px solid black;
+  margin-right: 11%;
+}
+
+#login-form{
+  border: 2px solid black;
+  padding: 5%;
+  background: white;
+}
+
+#form-border{
+  margin: 20% 5% 0 5%;
+}
+
+#map{
+  height: 100%;
+}
+
+#login-form{
+  display: none;
 }
 
 #title{
@@ -148,7 +168,12 @@ nav ul li a{
 }
 
 .button{
-  width: 80px;
+  width: 90px;
+}
+
+#sign-up-btn{
+  background: white;
+  color: #007BFF;
 }
 
 /* The Close Button */
@@ -165,6 +190,8 @@ nav ul li a{
   text-decoration: none;
   cursor: pointer;
 } */
+
+
 
 
 @font-face {
