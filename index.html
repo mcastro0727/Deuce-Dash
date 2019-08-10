@@ -42,9 +42,10 @@
             <li><a href="#"><img src="assets/images/journal.png" class="icon">Bathroom Log</a></li>
             <li><a href="#" id="add-button"><img src="assets/images/plus.jpg" class="icon">Add Location</a></li>
             <li><a href="#" id="login-link"><img src="assets/images/journal.png" class="icon">Log-in</a></li>
-
         </ul>
     </nav>
+
+    
 
     
     <!-- <div id="modal" class="modal">
@@ -70,14 +71,23 @@
       </div>
         <span id="address-text">Address: <input id="address-input" type="text"></span>
       <div class="modal-footer">
-        <button id="submit" type="button" class="button btn btn-primary">Add</button>
-        <button id="cancel" type="button" class="button btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button id="submit" type="button" class="new-location-button btn btn-primary">Add</button>
+        <button id="cancel" type="button" class="new-location-button btn btn-secondary" data-dismiss="modal">Cancel</button>
       </div>
     </div>
   </div>
 </div>
 
     <div id="display">
+        <div id="reviews">
+            <div id="review-form" class="form-group">
+                <p id="comment-header"></p>
+                <div id="comments"></div>
+                <label for="comment-box">New Comment:</label>
+                <textarea class="form-control rounded-0" id="comment-box" rows="3"></textarea>
+                <button id="new-comment-btn" type="submit" class="btn btn-primary button">Submit</button>
+            </div>
+        </div>
         <div id="map"></div>
         <div id="form-border">
             <form id="login-form" class="container">
