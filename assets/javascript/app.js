@@ -1,14 +1,26 @@
+var email
+var password
+
+
+
 var config = {
   apiKey: "AIzaSyAn5NoP9LgIzSdhe8-H_zmBhAUOxWz7Huc",
   authDomain: "deuce-dash.firebaseapp.com",
   databaseURL: "https://deuce-dash.firebaseio.com",
-  storageBucket: "deuce-dash.appspot.com"
+  storageBucket: "deuce-dash.appspot.com",
+  projectId: "deuce-dash"
 }
 
-firebase.initializeApp(config);
+firebase.initializeApp(config)
 
-var database = firebase.database();
+var database = firebase.database()
+var db = firebase.firestore()
+var auth = firebase.auth()
+
+
 var myMap
+
+
 
 function initMap() {
   var myLatLng = {
@@ -31,15 +43,16 @@ $(document).ready(function () {
   database.ref().on("child_added", function (childSnapshot) {
     var lat = childSnapshot.val().lat
     var lng = childSnapshot.val().lng
+    var address = childSnapshot.val().address
     var coord = new google.maps.LatLng(lat, lng)
-    addMarker(coord)
+    // addMarker(coord, address)
   })
 
-  function addMarker(coordinates) {
+  function addMarker(coordinates, address) {
     var marker = new google.maps.Marker({
       position: coordinates,
       map: myMap,
-      title: "address"
+      title: address
     })
     marker.addListener('click', function () {
       if (myMap.getZoom() == 12) {
@@ -57,7 +70,7 @@ $(document).ready(function () {
     })
   }
 
-  function convertLocation(location) {
+  function convertLocation(location, address) {
     var queryURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + location + "&key=AIzaSyCkioyz1epNmUDEt2m_AnGPVYsD89b-E3g"
     $.ajax({
       url: queryURL,
@@ -69,10 +82,11 @@ $(document).ready(function () {
 
       database.ref().push({
         lat: lat,
-        lng: lng
+        lng: lng,
+        address: address
       })
 
-      addMarker(coord)
+      // addMarker(coord, address)
     })
   }
 
@@ -85,15 +99,20 @@ $(document).ready(function () {
     return (stringPlus)
   }
 
-  var modal = document.getElementById("modal");
-  var btn = document.getElementById("myBtn");
-  var span = document.getElementsByClassName("close")[0];
+  function capitalizeWords(str){
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+  }
+
+  var modal = document.getElementById("add-modal");
+  // var btn = document.getElementById("myBtn");
+  // var span = document.getElementsByClassName("close")[0];
 
   $("#add-button").on("click", function () {
-    $(".modal").css("display", "block")
+    $("#add-modal").css("display", "block")
+    $("#address-input").focus()
 
     $("#submit").on("click", function () {
-      convertLocation(addPlus($("#address-input").val()))
+      convertLocation(addPlus($("#address-input").val()), capitalizeWords($("#address-input").val()))
       $("#address-input").val("")
     })
 
@@ -103,7 +122,7 @@ $(document).ready(function () {
   })
 
   $(".button").on("click", function () {
-    modal.style.display = "none";
+    $("#add-modal").fadeOut(200)
   })
 
   window.onclick = function (event) {
@@ -112,6 +131,52 @@ $(document).ready(function () {
     }
   }
 
+  $("#login-link").on("click", function(){
+    $("#map").css("display","none")
+    $("#login-form").css("display","block")
+    $("#display").css("background", "grey")
+  })
+
+  $("#login-btn").on("click", function(){
+    email = $("#input-email").val()
+    password = $("#input-password").val()
+    console.log(password)
+    var promise = auth.signInWithEmailAndPassword(email, password)
+    promise.catch(function(e){
+      console.log(e.message)
+    })
+    // console.log(promise)
+    // $("#input-email").val("")
+    // $("#input-password").val("")
+  })
+
+  $("#sign-up-btn").on("click", function(){
+    var email = $("#input-email").val()
+    var password = $("#input-password").val()
+    var user = auth.currentUser
+    var promise = auth.createUserWithEmailAndPassword(email, password)
+    promise.catch(function(e){
+      console.log(e.message)
+    })
+    db.collection("users").doc(user.uid).set({
+      email: email
+    })
+    // .then(function() {
+    //     console.log("Document successfully written!");
+    // })
+    // .catch(function(error) {
+    //     console.error("Error writing document: ", error);
+    // });
+  })
+
 
 
 })
+  firebase.auth().onAuthStateChanged(function(firebaseUser){
+    if(firebaseUser){
+      console.log(firebaseUser)
+    }
+    else{
+      console.log('not logged in')
+    }
+  })
