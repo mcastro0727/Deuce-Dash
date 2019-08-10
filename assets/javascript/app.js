@@ -1,5 +1,6 @@
 var email
 var password
+var commentCount = 0
 
 
 
@@ -55,19 +56,33 @@ $(document).ready(function () {
       title: address
     })
     marker.addListener('click', function () {
-      if (myMap.getZoom() == 12) {
-        myMap.setZoom(15)
-        myMap.setCenter(marker.getPosition())
-      }
-      else if(myMap.getZoom() == 15){
-        myMap.setZoom(18)
-        myMap.setCenter(marker.getPosition())
-      }
-      else {
-        myMap.setZoom(12)
-        myMap.setCenter(marker.getPosition())
-      }
+      
+      var address = $("#comment-header")
+      var comments = $("#comments")
+      address.empty()
+      comments.empty()
+      address.text(this.title)
+      db.collection("users").get().then(function(snapshot){
+        console.log(snapshot.docs)
+        snapshot.docs.forEach(function(doc){
+            // renderComments(doc)
+            console.log(doc.id)
+        })
+
+      })
+      
     })
+  }
+
+  function renderComments(doc){
+    var comments = $("#comments")
+    var newComment = $("<p>")
+      console.log("1")
+      console.log(doc.data())
+      console.log("2")
+      
+    if(doc.id == $("#comment-header").text()){
+    }
   }
 
   function convertLocation(location, address) {
@@ -86,7 +101,7 @@ $(document).ready(function () {
         address: address
       })
 
-      // addMarker(coord, address)
+      addMarker(coord, address)
     })
   }
 
@@ -121,7 +136,7 @@ $(document).ready(function () {
     })
   })
 
-  $(".button").on("click", function () {
+  $(".new-location-button").on("click", function () {
     $("#add-modal").fadeOut(200)
   })
 
@@ -151,8 +166,8 @@ $(document).ready(function () {
   })
 
   $("#sign-up-btn").on("click", function(){
-    var email = $("#input-email").val()
-    var password = $("#input-password").val()
+    email = $("#input-email").val()
+    password = $("#input-password").val()
     var user = auth.currentUser
     var promise = auth.createUserWithEmailAndPassword(email, password)
     promise.catch(function(e){
@@ -161,13 +176,39 @@ $(document).ready(function () {
     db.collection("users").doc(user.uid).set({
       email: email
     })
-    // .then(function() {
-    //     console.log("Document successfully written!");
-    // })
-    // .catch(function(error) {
-    //     console.error("Error writing document: ", error);
-    // });
+    .then(function() {
+        console.log("Document successfully written!");
+    })
+    .catch(function(error) {
+        console.error("Error writing document: ", error);
+    })
+    $("#login-form").css("display","none")
+    $("#map").css("display","block")
   })
+
+  $("#new-comment-btn").on("click", function(){
+    var commentDiv = $("<div>")
+    var userDiv = $("<div>")
+    userDiv.text(auth.currentUser.email)
+    commentDiv.text($("#comment-box").val())
+    $("#reviews").append(userDiv)
+    $("#reviews").append(commentDiv)
+    console.log(email)
+    console.log($("#comment-box").val())
+    console.log($("#comment-header").text())
+    console.log(auth.currentUser.uid)
+    db.collection("reviews").doc($("#comment-header").text()).collection(auth.currentUser.email).add({
+      email: email,
+      comment: $("#comment-box").val()
+    })
+
+  })
+
+
+
+convertLocation(addPlus("168-02 P.O Edward Byrne Ave."),"168-02 P.O Edward Byrne Ave.")
+convertLocation(addPlus("64-2 Catalpa Avenue"), "64-2 Catalpa Avenue")
+convertLocation(addPlus("92-08 222nd Street"), "92-08 222nd Street")
 
 
 
