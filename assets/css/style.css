@@ -103,6 +103,16 @@ nav{
   background-color: black;
 }
 
+#reviews{
+  position: fixed;
+  z-index: 1000;
+  top: 176.859px;
+  bottom: 0;
+  width: 200px;
+  left:200px;
+  background-color: lightgreen;
+}
+
 nav ul{
   list-style: none;
   margin-top: 18px;
