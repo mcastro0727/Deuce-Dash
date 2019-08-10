@@ -22,19 +22,6 @@
     <!-- GeoFire Database -->
     <script src="https://cdn.firebase.com/libs/geofire/5.0.1/geofire.min.js"></script>
 
-<<<<<<< HEAD
-=======
-    <!-- jQuery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-    <!-- Firebase Core JavaScript Link -->
-    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
-    <!-- Specific Firebase products we want (Database) -->
-    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
-    <!-- GeoFire Database -->
-    <script src="https://cdn.firebase.com/libs/geofire/5.0.1/geofire.min.js"></script>
-
->>>>>>> 68afb12936595ae331c5294633146791ed00414f
 </head>
 
 <body>
@@ -48,9 +35,9 @@
     <nav>
         <h2 id="nav-title">Navigation</h2>
         <ul>
-            <li><a href="#"><img src="assets/images/toilet.png" class="icon">Find a Restroom</a></li>
-            <li><a href="#"><img src="assets/images/newspaper.png" class="icon">Reading Material</a></li>
-            <li><a href="#"><img src="assets/images/journal.png" class="icon">Bathroom Log</a></li>
+            <li><a href="#" id ="map-button"><img src="assets/images/toilet.png" class="icon">Find a Restroom</a></li>
+            <li><a href="#" id ="reading-button"><img src="assets/images/newspaper.png" class="icon">Reading Material</a></li>
+            <li><a href="#" id ="room-log"><img src="assets/images/journal.png" class="icon">Bathroom Log</a></li>
             <li><a href="#" id="add-button"><img src="assets/images/plus.jpg" class="icon">Add Location</a></li>
         </ul>
     </nav>
@@ -67,17 +54,28 @@
 
 
 
-    <div id="map"></div>
+    <div id="map">
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkioyz1epNmUDEt2m_AnGPVYsD89b-E3g&callback=initMap"
         async defer></script>
-<<<<<<< HEAD
-
     <script src="assets/javascript/app.js"></script>
-=======
-    <script src="assets/javascript/app.js"></script>
+    </div>
 
->>>>>>> 68afb12936595ae331c5294633146791ed00414f
+
+ <div id= "readingMat">
+        <h1>Today's Top Articles</h1>
+    
+            <div>
+                <div id = "articlesHere"></div>
+            </div> 
+    </div>
+
+</div>
+    
+    <div id = "roomLog">
+        
+    </div>
+
 </body>
 
 </html>

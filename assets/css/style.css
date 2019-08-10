@@ -155,3 +155,24 @@ nav ul li a{
 
 } 
 
+
+#readingMat {
+  position: fixed;
+  top: 175px;
+  left: 200px;
+  bottom: 0;
+  height: 84vh;
+  text-align: center;
+  background-color: #888;
+  width: 1080px;
+}
+
+#roomLog {
+  position: fixed;
+  top: 180px;
+  left: 200px;
+  bottom: 0;
+  height: 84vh;
+  text-align: center;
+} 
+
