@@ -9,10 +9,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-    <script
-  src="https://code.jquery.com/jquery-3.4.1.min.js"
-  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-  crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- Firebase Core JavaScript Link -->
@@ -29,9 +27,20 @@
 <body>
 
     <header>
-        <img src="assets/images/running_man.png" class="title-icon">
-        <h1 id="title">Deuce Dash</h1><img src="assets/images/arrow.jpg" class="title-icon">
-        <p id="tagline"><span id="overline">You know <i>how</i> to go - we'll show you <i>where</i>.</span></p>
+        <div class="container">
+            <div class="row no-gutters">
+                <div class="col-3" style="text-align:right; padding-top: 5px">
+                    <img src="assets/images/running_man.png" class="title-icon-man">
+                </div>
+                <div class="col-6">
+                    <h1 id="title">Deuce Dash</h1>
+                </div>
+                <div class="col-3" style="text-align:left; padding-top:25px">
+                    <img src="assets/images/arrow.jpg" class="title-icon-arrow">
+                </div>
+            </div>
+        </div>
+                <p id="tagline"><span id="overline">You know <i>how</i> to go - we'll show you <i>where</i>.</span></p>
     </header>
 
     <nav>
@@ -45,9 +54,9 @@
         </ul>
     </nav>
 
-    
 
-    
+
+
     <!-- <div id="modal" class="modal">
         <div class="modal-content">
             <span>Address: <input id="address-input" type="text"></span>
@@ -60,23 +69,24 @@
 
 
 
-<div id="add-modal" class="modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">New Location</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-        <span id="address-text">Address: <input id="address-input" type="text"></span>
-      <div class="modal-footer">
-        <button id="submit" type="button" class="new-location-button btn btn-primary">Add</button>
-        <button id="cancel" type="button" class="new-location-button btn btn-secondary" data-dismiss="modal">Cancel</button>
-      </div>
+    <div id="add-modal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">New Location</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <span id="address-text">Address: <input id="address-input" type="text"></span>
+                <div class="modal-footer">
+                    <button id="submit" type="button" class="new-location-button btn btn-primary">Add</button>
+                    <button id="cancel" type="button" class="new-location-button btn btn-secondary"
+                        data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 
     <div id="display">
         <div id="reviews">
@@ -93,7 +103,8 @@
             <form id="login-form" class="container">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" id="input-email" aria-describedby="emailHelp" placeholder="Enter email">
+                    <input type="email" class="form-control" id="input-email" aria-describedby="emailHelp"
+                        placeholder="Enter email">
                 </div>
                 <div class="form-group">
                     <label for="input-password">Password</label>
@@ -104,7 +115,7 @@
             </form>
         </div>
     </div>
-    
+
 
     <script src="assets/javascript/app.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkioyz1epNmUDEt2m_AnGPVYsD89b-E3g&callback=initMap"

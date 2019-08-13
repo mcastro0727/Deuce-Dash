@@ -30,12 +30,17 @@
 #title{
   font-family: foobar;
   font-weight: bold;
-  font-size: 5em;
-  display: inline;
+  font-size: 95px;
+  padding-top: 10px;
+  padding: 0;
 }
 
-.title-icon{
-  display: inline;
+.col-6{
+  padding: 0;
+}
+
+.col-3{
+  padding: 0;
 }
 
 #overline{
