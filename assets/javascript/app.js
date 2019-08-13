@@ -40,6 +40,11 @@ function initMap() {
 }
 
 $(document).ready(function () {
+  $("#roomlog").hide();
+  $("#readingMat").hide();
+}); 
+
+$(document).ready(function () {
 
   database.ref().on("child_added", function (childSnapshot) {
     var lat = childSnapshot.val().lat
@@ -213,11 +218,63 @@ convertLocation(addPlus("92-08 222nd Street"), "92-08 222nd Street")
 
 
 })
-  firebase.auth().onAuthStateChanged(function(firebaseUser){
-    if(firebaseUser){
-      console.log(firebaseUser)
-    }
-    else{
-      console.log('not logged in')
-    }
-  })
+
+firebase.auth().onAuthStateChanged(function(firebaseUser){
+  if(firebaseUser){
+    console.log(firebaseUser)
+  }
+  else{
+    console.log('not logged in')
+  }
+});
+
+//On Click functions for Navbar. Each one hides whats not on the page and shows what is supposed to be on the specific page. 
+$("#map-button").on("click", function hide() {
+  $("#roomlog").hide()
+  $("#readingMat").hide()
+  $("#map").show()
+});
+
+
+$("#reading-button").on("click", function hide() {
+  $("#map").hide()
+  $("#roomlog").hide()
+  $("#readingMat").show()
+
+});
+
+$("#room-log").on("click", function hide() {
+  $("#map").hide()
+  $("#readingMat").hide()
+  $("#roomlog").show()
+});
+
+
+
+
+
+var queryURL = "https://api.nytimes.com/svc/topstories/v2/science.json?api-key=wsP6DVbJDjNI1mKZBsqxLGKeDAxfIOtp"
+
+
+  $.ajax({
+      url: queryURL,
+      method: "GET"
+  }).done(function(response) {
+
+    console.log(response);
+
+    
+      $("#articlesHere").append(response.results["0"].title + "<br>" +"<a href='" + response.results["0"].url + "'>" + response.results["0"].url + "</a>" + "<br>")
+
+      $("#articlesHere").append(response.results["1"].title + "<br>" +"<a href='" + response.results["1"].url + "'>" + response.results["1"].url + "</a>" + "<br>")
+
+      $("#articlesHere").append(response.results["2"].title + "<br>" +"<a href='" + response.results["2"].url + "'>" + response.results["2"].url + "</a>" + "<br>")
+
+      $("#articlesHere").append(response.results["3"].title + "<br>" +"<a href='" + response.results["3"].url + "'>" + response.results["3"].url + "</a>" + "<br>")
+
+      $("#articlesHere").append(response.results["4"].title + "<br>" +"<a href='" + response.results["4"].url + "'>" + response.results["4"].url + "</a>" + "<br>")
+
+      $("#articlesHere").append(response.results["5"].title + "<br>" +"<a href='" + response.results["5"].url + "'>" + response.results["5"].url + "</a>" + "<br>")
+
+  });
+ 
