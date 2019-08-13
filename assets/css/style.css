@@ -211,3 +211,26 @@ nav ul li a{
 
 } 
 
+
+#readingMat {
+  position: fixed;
+  top: 176.859px;
+  left: 23%;
+  bottom: 0;
+  width: 75%;
+  height: 80%;
+  border: 5px solid black;
+  margin-right: 11%;
+}
+
+#roomLog {
+  position: fixed;
+  top: 176.859px;
+  left: 23%;
+  bottom: 0;
+  width: 75%;
+  height: 80%;
+  border: 5px solid black;
+  margin-right: 11%;
+} 
+
