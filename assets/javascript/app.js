@@ -400,6 +400,7 @@ $("#reading-button").on("click", function hide() {
   $("#map").hide()
   $("#roomlog").hide()
   $("#readingMat").show()
+  $("#display").hide()
 
 });
 
@@ -424,17 +425,17 @@ var queryURL = "https://api.nytimes.com/svc/topstories/v2/science.json?api-key=w
     console.log(response);
 
     
-      $("#articlesHere").append(response.results["0"].title + "<br>" +"<a href='" + response.results["0"].url + "'>" + response.results["0"].url + "</a>" + "<br>")
+      $("#articlesHere").append(response.results["0"].title + "<br>" +"<a href='"  + response.results["0"].url + "' target='_blank'>" + response.results["0"].url + "</a>" + "<br>")
 
-      $("#articlesHere").append(response.results["1"].title + "<br>" +"<a href='" + response.results["1"].url + "'>" + response.results["1"].url + "</a>" + "<br>")
+      $("#articlesHere").append(response.results["1"].title + "<br>" +"<a href='"  + response.results["1"].url + "' target='_blank'>" + response.results["1"].url + "</a>" + "<br>")
 
-      $("#articlesHere").append(response.results["2"].title + "<br>" +"<a href='" + response.results["2"].url + "'>" + response.results["2"].url + "</a>" + "<br>")
+      $("#articlesHere").append(response.results["2"].title + "<br>" +"<a href='"  + response.results["2"].url + "' target='_blank'>" + response.results["2"].url + "</a>" + "<br>")
 
-      $("#articlesHere").append(response.results["3"].title + "<br>" +"<a href='" + response.results["3"].url + "'>" + response.results["3"].url + "</a>" + "<br>")
+      $("#articlesHere").append(response.results["3"].title + "<br>" +"<a href='"  + response.results["3"].url + "' target='_blank'>" + response.results["3"].url + "</a>" + "<br>")
 
-      $("#articlesHere").append(response.results["4"].title + "<br>" +"<a href='" + response.results["4"].url + "'>" + response.results["4"].url + "</a>" + "<br>")
+      $("#articlesHere").append(response.results["4"].title + "<br>" +"<a href='"  + response.results["4"].url + "' target='_blank'>" + response.results["4"].url + "</a>" + "<br>")
 
-      $("#articlesHere").append(response.results["5"].title + "<br>" +"<a href='" + response.results["5"].url + "'>" + response.results["5"].url + "</a>" + "<br>")
+      $("#articlesHere").append(response.results["5"].title + "<br>" +"<a href='"  + response.results["5"].url + "' target='_blank'>" + response.results["5"].url + "</a>" + "<br>")
 
   });
  
