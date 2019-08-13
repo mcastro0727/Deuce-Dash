@@ -17,11 +17,11 @@
 
 #form-border{
   margin: 20% 5% 0 5%;
+  display: none;
 }
 
 #map{
   height: 100%;
-  display: none;
 }
 
 /* #login-form{
