@@ -1,7 +1,10 @@
 var email
 var password
-var commentCount = 0
-
+var isLoggedIn = false
+var addModal = $("#add-modal")
+var signUpModal = $("#sign-up-modal")
+var errorCode
+var today = new Date()
 
 
 var config = {
@@ -13,17 +16,13 @@ var config = {
 }
 
 firebase.initializeApp(config)
-
 var database = firebase.database()
 var db = firebase.firestore()
 var auth = firebase.auth()
-
-
 var myMap
 
-
-
 function initMap() {
+
   var myLatLng = {
     lat: 40.782710,
     lng: -73.965310
@@ -35,9 +34,16 @@ function initMap() {
   })
 
   myMap = map
-
-
 }
+
+firebase.auth().onAuthStateChanged(function(firebaseUser){
+  if(firebaseUser){
+    console.log(firebaseUser)
+  }
+  else{
+    console.log('not logged in')
+  }
+})
 
 $(document).ready(function () {
   $("#roomlog").hide();
@@ -55,47 +61,59 @@ $(document).ready(function () {
   })
 
   function addMarker(coordinates, address) {
+    
     var marker = new google.maps.Marker({
       position: coordinates,
       map: myMap,
       title: address
     })
+
     marker.addListener('click', function () {
-      
       var address = $("#comment-header")
-      var comments = $("#comments")
+      var comments = $("#comment-box")
+      var reviews = $("#review-comments")
+      $("#comment-box").focus()
       address.empty()
       comments.empty()
+      reviews.empty()
       address.text(this.title)
-      db.collection("users").get().then(function(snapshot){
-        console.log(snapshot.docs)
-        snapshot.docs.forEach(function(doc){
-            // renderComments(doc)
-            console.log(doc.id)
-        })
 
+
+
+
+
+      db.collection("reviews").where("address", "==", address.text()).orderBy("timeStamp").get()
+      .then(function(snapshot){
+        console.log(snapshot.docs)
+
+        snapshot.docs.forEach(function(doc){
+            console.log(doc.data().address)
+            var comment = $("<div class='comment'>")
+            var email = $("<div class='user'>")
+            var timeDiv = $("<div class='time'>")
+            timeDiv.text(doc.data().date + " @ " + doc.data().time)
+            comment.text(doc.data().comment)
+            email.text(doc.data().email)
+            $("#review-comments").prepend("<br>")
+            $("#review-comments").prepend(comment)
+            $("#review-comments").prepend(email)
+            $("#review-comments").prepend(timeDiv)
+            
+
+        })
       })
-      
     })
   }
 
-  function renderComments(doc){
-    var comments = $("#comments")
-    var newComment = $("<p>")
-      console.log("1")
-      console.log(doc.data())
-      console.log("2")
-      
-    if(doc.id == $("#comment-header").text()){
-    }
-  }
-
-  function convertLocation(location, address) {
+  function convertLocation(location) {
+    location = togglePlus(location)
     var queryURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + location + "&key=AIzaSyCkioyz1epNmUDEt2m_AnGPVYsD89b-E3g"
+    
     $.ajax({
       url: queryURL,
       method: "GET"
-    }).then(function (response) {
+    })
+    .then(function (response) {
       var lat = response.results[0].geometry.location.lat
       var lng = response.results[0].geometry.location.lng
       var coord = new google.maps.LatLng(lat, lng)
@@ -103,52 +121,98 @@ $(document).ready(function () {
       database.ref().push({
         lat: lat,
         lng: lng,
-        address: address
+        address: location
       })
 
-      addMarker(coord, address)
+      location = togglePlus(location)
+      addMarker(coord, location)
     })
   }
 
-  function addPlus(string) {
-    stringArray = string.split(" ")
-    var stringPlus = stringArray[0]
-    for (i = 1; i < stringArray.length; i++) {
-      stringPlus = stringPlus + "+" + stringArray[i]
-    }
-    return (stringPlus)
+
+  function register(){
+    email = $("#input-email").val()
+    password = $("#input-password").val()
+    var user = auth.currentUser
+    var promise = auth.createUserWithEmailAndPassword(email, password)
+    isLoggedIn = true
+
+    promise.catch(function(e){
+      errorCode = e.code
+      console.log(errorCode)
+      isLoggedIn = false
+    })
+    .then(function(){
+
+      if(errorCode == "auth/invalid-email"){
+        $("#modal-title").text("Invalid email.")
+        $("#register-text").text("email address is not valid.")
+        $("sign-up-modal").css("display", "block")
+      }
+
+      if(errorCode == "auth/invalid-password"){
+        $("#modal-title").text("Email address already registered.")
+        $("#register-text").text("You already have an account.")
+        $("sign-up-modal").css("display", "block")
+      }
+
+      if(isLoggedIn){
+
+        db.collection("users").doc(user.uid).set({
+          email: email
+        })
+        .then(function() {
+            console.log("Document successfully written!");
+        })
+        .catch(function(error) {
+            console.error("Error writing document: ", error);
+        })
+
+        $("#log-in-link-text").text("Log-out")
+        $("#input-email").val("")
+        $("#input-password").val("")
+        $("#login-form").css("display","none")
+        $("#map").css("display","block")
+      }
+    })
   }
 
+  function togglePlus(string) {
+    
+    if(string.includes("+")){
+      var stringArray = string.split("+")
+      var switchChar = " "   
+    }
+    else{
+      var stringArray = string.split(" ")
+      var switchChar = "+"
+    } 
+
+    var stringPlus = stringArray[0]
+
+    for (i = 1; i < stringArray.length; i++) {
+      stringPlus = stringPlus + switchChar + stringArray[i]
+    }
+
+    return (stringPlus)
+  }
+  
   function capitalizeWords(str){
     return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
   }
 
-  var modal = document.getElementById("add-modal");
-  // var btn = document.getElementById("myBtn");
-  // var span = document.getElementsByClassName("close")[0];
-
-  $("#add-button").on("click", function () {
-    $("#add-modal").css("display", "block")
-    $("#address-input").focus()
-
-    $("#submit").on("click", function () {
-      convertLocation(addPlus($("#address-input").val()), capitalizeWords($("#address-input").val()))
-      $("#address-input").val("")
-    })
-
-    $("#cancel").on("click", function () {
-      $("#address-input").val("")
-    })
-  })
-
-  $(".new-location-button").on("click", function () {
-    $("#add-modal").fadeOut(200)
-  })
-
   window.onclick = function (event) {
-    if (event.target == modal) {
+    
+    if (event.target == addModal) {
       modal.style.display = "none";
     }
+  }
+
+  function logInSignUpBtnClick(){
+    $("#input-email").val("")
+    $("#input-password").val("")
+    $("#login-form").css("display","none")
+    $("#map").css("display","block")
   }
 
   $("#login-link").on("click", function(){
@@ -156,66 +220,162 @@ $(document).ready(function () {
     $("#login-form").css("display","block")
     $("#display").css("background", "grey")
   })
+  
+  if(isLoggedIn){
+    $("#log-in-link-text").text("Log-out")
+  }
+  else{
+    $("#log-in-link-text").text("Log-in")
+  }
 
   $("#login-btn").on("click", function(){
     email = $("#input-email").val()
     password = $("#input-password").val()
-    console.log(password)
+
     var promise = auth.signInWithEmailAndPassword(email, password)
+    isLoggedIn = true
+
     promise.catch(function(e){
-      console.log(e.message)
+      errorCode = e.code
+      console.log(errorCode)
+      isLoggedIn = false
     })
-    // console.log(promise)
-    // $("#input-email").val("")
-    // $("#input-password").val("")
+    .then(function(){
+
+      if(errorCode == "auth/wrong-password"){
+        $("#modal-title").text("Incorrect password.")
+        $("#register-text").text("")
+
+        $("#reg-cancel-btn").on("click", function(){
+          signUpModal.css("display", "none")
+        })
+
+        $("#reg-ok-btn").on("click", function(){
+          $("#sign-up-modal").css("display", "none")
+        })
+      }
+
+      if(errorCode == "auth/user-not-found"){
+        $("#modal-title").text("Account not found.")
+        $("#register-text").text("Register account now?")
+        
+        $("#reg-cancel-btn").on("click", function(){
+          signUpModal.css("display", "none")
+          $("#input-email").val("")
+          $("#input-password").val("")
+        })
+
+        $("#reg-ok-btn").on("click", function(){
+          register()
+          $("#sign-up-modal").css("display", "none")
+          $("#log-in-link-text").text("Log-out")
+        })
+      }
+
+      if(isLoggedIn){
+        $("#log-in-link-text").text("Log-out")
+        logInSignUpBtnClick()
+      }
+      else{
+        signUpModal.css("display", "block")
+      }
+    })
   })
 
+
   $("#sign-up-btn").on("click", function(){
-    email = $("#input-email").val()
-    password = $("#input-password").val()
-    var user = auth.currentUser
-    var promise = auth.createUserWithEmailAndPassword(email, password)
-    promise.catch(function(e){
-      console.log(e.message)
-    })
-    db.collection("users").doc(user.uid).set({
-      email: email
-    })
-    .then(function() {
-        console.log("Document successfully written!");
-    })
-    .catch(function(error) {
-        console.error("Error writing document: ", error);
-    })
-    $("#login-form").css("display","none")
-    $("#map").css("display","block")
+      register()
   })
 
   $("#new-comment-btn").on("click", function(){
-    var commentDiv = $("<div>")
-    var userDiv = $("<div>")
+    var commentDiv = $("<div class='comment'>")
+    var userDiv = $("<div class='user'>")
+    var timeDateDiv = $("<div class='time'>")
+    var address = $("#comment-header").text()
+    var hours = today.getHours()
+    var mins = today.getMinutes()
+    var amPM = "AM"
+    var month = today.getMonth()
+    var day = today.getDate()
+    var timeStampHour = hours
+    
+    if(hours < 10){
+      timeStamphour = "0" + hours
+    }
+
+    if(day < 10){
+      day = "0" + day
+    }
+
+    if(month < 10){
+      month = "0" + month
+    }
+
+    if(today.getMinutes() < 10){
+      mins = "0" + mins
+    }
+
+    if(today.getHours() > 12){
+      hours = hours - 12
+      amPM = "PM"
+    }
+    else if(today.getHours() == 0){
+      hours = 12
+    }
+
+    var time = hours + ":" + mins + " " + amPM
+    var date = (today.getMonth() + 1) + "-" + today.getDate() + "-" + today.getFullYear()
+    var timeStamp = "" + today.getFullYear() + month + day + timeStampHour + mins
+    console.log(timeStamp)
     userDiv.text(auth.currentUser.email)
     commentDiv.text($("#comment-box").val())
-    $("#reviews").append(userDiv)
-    $("#reviews").append(commentDiv)
-    console.log(email)
-    console.log($("#comment-box").val())
-    console.log($("#comment-header").text())
-    console.log(auth.currentUser.uid)
-    db.collection("reviews").doc($("#comment-header").text()).collection(auth.currentUser.email).add({
+    timeDateDiv.text(date + " @ " + time)
+    $("#review-comments").prepend("<br>")
+    $("#review-comments").prepend(commentDiv)
+    $("#review-comments").prepend(userDiv)
+    $("#review-comments").prepend(timeDateDiv)
+
+    db.collection("reviews").add({
       email: email,
-      comment: $("#comment-box").val()
+      comment: $("#comment-box").val(),
+      address: address,
+      time: time,
+      date: date,
+      timeStamp: timeStamp
     })
 
+     $("#comment-box").val("")
+     $("#comment-box").focus()
   })
 
+  $("#add-new-loc-link").on("click", function () {
+    
+    if(isLoggedIn){
+      addModal.css("display", "block")
+      $("#address-input").focus()
 
+      $("#submit-new-loc-btn").on("click", function () {
+        var address=capitalizeWords($("#address-input").val())
+        convertLocation(address)
+        $("#address-input").val("")
+        addModal.css("display", "none")
+        db.collection("locations").doc(address).set({})
+    })
 
-convertLocation(addPlus("168-02 P.O Edward Byrne Ave."),"168-02 P.O Edward Byrne Ave.")
-convertLocation(addPlus("64-2 Catalpa Avenue"), "64-2 Catalpa Avenue")
-convertLocation(addPlus("92-08 222nd Street"), "92-08 222nd Street")
+      $("#cancel-new-loc-btn").on("click", function () {
+        $("#address-input").val("")
+        addModal.css("display", "none")
+      })
+    }
+  })
 
+  $(".new-location-btn").on("click", function () {
+    addModal.fadeOut(200)
+  })
 
+  convertLocation("168-02 P.O Edward Byrne Ave.")
+  convertLocation("64-2 Catalpa Avenue")
+  convertLocation("92-08 222nd Street")
 
 })
 
@@ -240,6 +400,7 @@ $("#reading-button").on("click", function hide() {
   $("#map").hide()
   $("#roomlog").hide()
   $("#readingMat").show()
+  $("#display").hide()
 
 });
 
@@ -264,17 +425,17 @@ var queryURL = "https://api.nytimes.com/svc/topstories/v2/science.json?api-key=w
     console.log(response);
 
     
-      $("#articlesHere").append(response.results["0"].title + "<br>" +"<a href='" + response.results["0"].url + "'>" + response.results["0"].url + "</a>" + "<br>")
+      $("#articlesHere").append(response.results["0"].title + "<br>" +"<a href='"  + response.results["0"].url + "' target='_blank'>" + response.results["0"].url + "</a>" + "<br>")
 
-      $("#articlesHere").append(response.results["1"].title + "<br>" +"<a href='" + response.results["1"].url + "'>" + response.results["1"].url + "</a>" + "<br>")
+      $("#articlesHere").append(response.results["1"].title + "<br>" +"<a href='"  + response.results["1"].url + "' target='_blank'>" + response.results["1"].url + "</a>" + "<br>")
 
-      $("#articlesHere").append(response.results["2"].title + "<br>" +"<a href='" + response.results["2"].url + "'>" + response.results["2"].url + "</a>" + "<br>")
+      $("#articlesHere").append(response.results["2"].title + "<br>" +"<a href='"  + response.results["2"].url + "' target='_blank'>" + response.results["2"].url + "</a>" + "<br>")
 
-      $("#articlesHere").append(response.results["3"].title + "<br>" +"<a href='" + response.results["3"].url + "'>" + response.results["3"].url + "</a>" + "<br>")
+      $("#articlesHere").append(response.results["3"].title + "<br>" +"<a href='"  + response.results["3"].url + "' target='_blank'>" + response.results["3"].url + "</a>" + "<br>")
 
-      $("#articlesHere").append(response.results["4"].title + "<br>" +"<a href='" + response.results["4"].url + "'>" + response.results["4"].url + "</a>" + "<br>")
+      $("#articlesHere").append(response.results["4"].title + "<br>" +"<a href='"  + response.results["4"].url + "' target='_blank'>" + response.results["4"].url + "</a>" + "<br>")
 
-      $("#articlesHere").append(response.results["5"].title + "<br>" +"<a href='" + response.results["5"].url + "'>" + response.results["5"].url + "</a>" + "<br>")
+      $("#articlesHere").append(response.results["5"].title + "<br>" +"<a href='"  + response.results["5"].url + "' target='_blank'>" + response.results["5"].url + "</a>" + "<br>")
 
   });
  
