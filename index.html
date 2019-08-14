@@ -2,142 +2,147 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Deuce Dash</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-  <!-- jQuery -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <!-- Firebase Core JavaScript Link -->
-  <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
-  <!-- Specific Firebase products we want (Database) -->
-  <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/6.3.5/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-firestore.js"></script>
-  <!-- GeoFire Database -->
-  <script src="https://cdn.firebase.com/libs/geofire/5.0.1/geofire.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Deuce Dash</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
 
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Firebase Core JavaScript Link -->
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
+    <!-- Specific Firebase products we want (Database) -->
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.3.5/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-firestore.js"></script>
+    <!-- GeoFire Database -->
+    <script src="https://cdn.firebase.com/libs/geofire/5.0.1/geofire.min.js"></script>
 </head>
 
 <body>
 
-  <header>
-    <div class="container">
-      <div class="row no-gutters">
-        <div class="col-3" style="text-align:right; padding-top: 5px">
-          <img src="assets/images/running_man.png">
+    <header>
+        <div class="container">
+            <div class="row no-gutters animated slideInLeft">
+                <div class="col-3" style="text-align:right; padding-top: 5px">
+                    <img src="assets/images/running_man.png">
+                </div>
+                <div class="col-6">
+                    <h1 id="title">Deuce Dash</h1>
+                </div>
+                <div class="col-3" style="text-align:left; padding-top:25px">
+                    <img src="assets/images/arrow.jpg">
+                </div>
+            </div>
         </div>
-        <div class="col-6">
-          <h1 id="title">Deuce Dash</h1>
+        <p id="tagline"><span id="overline">You know <i>how</i> to go - we'll show you <i>where</i>.</span></p>
+    </header>
+
+    <nav>
+        <h2 id="nav-title">Navigation</h2>
+        <ul>
+            <li><a href="#"><img src="assets/images/toilet.png" class="icon">Find a Restroom</a></li>
+            <li><a href="#" id="reading-button"><img src="assets/images/newspaper.png" class="icon">Reading Material</a>
+            </li>
+            <li><a href="#" id="add-new-loc-link"><img src="assets/images/plus.jpg" class="icon">Add Location</a></li>
+            <li><a href="#" id="login-link"><img src="assets/images/login.png" class="icon"><span
+                        id="log-in-link-text">Log-in</span></a></li>
+        </ul>
+    </nav>
+
+
+
+
+    <div id="readingMat">
+        <h1>Today's Top Articles</h1>
+        <div>
+            <div id="articlesHere"></div>
         </div>
-        <div class="col-3" style="text-align:left; padding-top:25px">
-          <img src="assets/images/arrow.jpg">
-        </div>
-      </div>
     </div>
-    <p id="tagline"><span id="overline">You know <i>how</i> to go - we'll show you <i>where</i>.</span></p>
-  </header>
-
-  <nav>
-    <h2 id="nav-title">Navigation</h2>
-    <ul>
-      <li><a href="#"><img src="assets/images/toilet.png" class="icon">Find a Restroom</a></li>
-      <li><a href="#" id="reading-button"><img src="assets/images/newspaper.png" class="icon">Reading Material</a></li>
-      <li><a href="#" id="add-new-loc-link"><img src="assets/images/plus.jpg" class="icon">Add Location</a></li>
-      <li><a href="#" id="login-link"><img src="assets/images/login.png" class="icon"><span
-            id="log-in-link-text">Log-in</span></a></li>
-    </ul>
-  </nav>
 
 
 
-
-  <div id="readingMat">
-    <h1>Today's Top Articles</h1>
-    <div>
-      <div id="articlesHere"></div>
+    <div id="add-modal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">New Location</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <span id="address-text">Address: <input id="address-input" type="text"></span>
+                <div class="modal-footer">
+                    <button id="submit-new-loc-btn" type="button" class=".new-location-btn btn btn-primary">Add</button>
+                    <button id="cancel-new-loc-btn" type="button" class=".new-location-btn btn btn-secondary"
+                        data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-
-
-
-  <div id="add-modal" class="modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">New Location</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+    
+    <div id="sign-up-modal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 id="modal-title" class="modal-title">Account not found.</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <span id="register-text">Register account now?</span>
+                <div class="modal-footer">
+                    <button id="reg-ok-btn" type="button" class=".new-location-btn btn btn-primary">Ok</button>
+                    <button id="reg-cancel-btn" type="button" class=".new-location-btn btn btn-secondary"
+                        data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
         </div>
-        <span id="address-text">Address: <input id="address-input" type="text"></span>
-        <div class="modal-footer">
-          <button id="submit-new-loc-btn" type="button" class=".new-location-btn btn btn-primary">Add</button>
-          <button id="cancel-new-loc-btn" type="button" class=".new-location-btn btn btn-secondary"
-            data-dismiss="modal">Cancel</button>
-        </div>
-      </div>
     </div>
-  </div>
 
-  <div id="sign-up-modal" class="modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 id="modal-title" class="modal-title">Account not found.</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+
+    <div id="display">
+        <div id="reviews">
+            <div id="review-form" class="form-group">
+                <p id="comment-header"></p>
+                <div id="comments"></div>
+                <h2 id="comment-title">Stall Wall</h2>
+                <textarea class="form-control rounded-0" id="comment-box" rows="3"></textarea>
+                <button id="new-comment-btn" type="submit" class="btn btn-primary button">Write on
+                    Stall</button>
+                <div id="review-comments"></div>
+            </div>
         </div>
-        <span id="register-text">Register account now?</span>
-        <div class="modal-footer">
-          <button id="reg-ok-btn" type="button" class=".new-location-btn btn btn-primary">Ok</button>
-          <button id="reg-cancel-btn" type="button" class=".new-location-btn btn btn-secondary"
-            data-dismiss="modal">Cancel</button>
+        <div id="map"></div>
+        <div id="form-border">
+            <form id="login-form" class="container">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email address</label>
+                    <input type="email" class="form-control" id="input-email" aria-describedby="emailHelp"
+                        placeholder="Enter email">
+                </div>
+                <div class="form-group">
+                    <label for="input-password">Password</label>
+                    <input type="password" class="form-control" id="input-password" placeholder="Password">
+                </div>
+                <button id="login-btn" type="submit" class="btn btn-primary button">Log in</button>
+                <button id="sign-up-btn" type="submit" class="btn btn-primary button">Sign Up</button>
+            </form>
         </div>
-      </div>
     </div>
-  </div>
 
 
-  <div id="display">
-    <div id="reviews">
-      <div id="review-form" class="form-group">
-        <p id="comment-header"></p>
-        <div id="comments"></div>
-        <h2 id="comment-title">Stall Wall</h2>
-        <textarea class="form-control rounded-0" id="comment-box" rows="3"></textarea>
-        <button id="new-comment-btn" type="submit" class="btn btn-primary button">Write on Stall</button>
-        <div id="review-comments"></div>
-      </div>
-    </div>
-    <div id="map"></div>
-    <div id="form-border">
-      <form id="login-form" class="container">
-        <div class="form-group">
-          <label for="exampleInputEmail1">Email address</label>
-          <input type="email" class="form-control" id="input-email" aria-describedby="emailHelp"
-            placeholder="Enter email">
-        </div>
-        <div class="form-group">
-          <label for="input-password">Password</label>
-          <input type="password" class="form-control" id="input-password" placeholder="Password">
-        </div>
-        <button id="login-btn" type="submit" class="btn btn-primary button">Log in</button>
-        <button id="sign-up-btn" type="submit" class="btn btn-primary button">Sign Up</button>
-      </form>
-    </div>
-  </div>
+    <script src="assets/javascript/app.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkioyz1epNmUDEt2m_AnGPVYsD89b-E3g&callback=initMap"
+        async defer></script>
 
-
-  <script src="assets/javascript/app.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkioyz1epNmUDEt2m_AnGPVYsD89b-E3g&callback=initMap"
-    async defer></script>
 
 </body>
 
