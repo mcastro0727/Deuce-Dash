@@ -17,11 +17,12 @@
 
 #form-border{
   margin: 20% 5% 0 5%;
-  display: none;
+  /* display: none; */
 }
 
 #map{
   height: 100%;
+  display: none;
 }
 
 /* #login-form{
@@ -139,6 +140,7 @@ nav{
 }
 
 #review-form{
+  display: none;
   position: fixed;
   z-index: 1000;
   top: 176.859px;

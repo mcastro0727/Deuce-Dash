@@ -57,11 +57,11 @@ $(document).ready(function () {
     var lng = childSnapshot.val().lng
     var address = childSnapshot.val().address
     var coord = new google.maps.LatLng(lat, lng)
-    // addMarker(coord, address)
+    addMarker(coord, address)
   })
 
   function addMarker(coordinates, address) {
-    
+    address = removePlus(address)
     var marker = new google.maps.Marker({
       position: coordinates,
       map: myMap,
@@ -72,6 +72,9 @@ $(document).ready(function () {
       var address = $("#comment-header")
       var comments = $("#comment-box")
       var reviews = $("#review-comments")
+      document.getElementById("comment-box").disabled=false
+      document.getElementById("new-comment-btn").disabled=false
+
       $("#comment-box").focus()
       address.empty()
       comments.empty()
@@ -106,7 +109,7 @@ $(document).ready(function () {
   }
 
   function convertLocation(location) {
-    location = togglePlus(location)
+    location = addPlus(location)
     var queryURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + location + "&key=AIzaSyCkioyz1epNmUDEt2m_AnGPVYsD89b-E3g"
     
     $.ajax({
@@ -124,7 +127,7 @@ $(document).ready(function () {
         address: location
       })
 
-      location = togglePlus(location)
+      location = addPlus(location)
       addMarker(coord, location)
     })
   }
@@ -173,28 +176,31 @@ $(document).ready(function () {
         $("#input-password").val("")
         $("#login-form").css("display","none")
         $("#map").css("display","block")
+        $("#review-form").css("display","block")
       }
     })
   }
 
-  function togglePlus(string) {
+  function addPlus(string) {
     
-    if(string.includes("+")){
-      var stringArray = string.split("+")
-      var switchChar = " "   
-    }
-    else{
-      var stringArray = string.split(" ")
-      var switchChar = "+"
-    } 
-
+    var stringArray = string.split("+")
     var stringPlus = stringArray[0]
 
     for (i = 1; i < stringArray.length; i++) {
-      stringPlus = stringPlus + switchChar + stringArray[i]
+      stringPlus = stringPlus + "+" + stringArray[i]
     }
-
     return (stringPlus)
+  }
+
+  function removePlus(string) {
+    
+    var stringArray = string.split("+")
+    var stringMinus = stringArray[0]
+
+    for (i = 1; i < stringArray.length; i++) {
+      stringMinus = stringMinus + " " + stringArray[i]
+    }
+    return (stringMinus)
   }
   
   function capitalizeWords(str){
@@ -213,10 +219,12 @@ $(document).ready(function () {
     $("#input-password").val("")
     $("#login-form").css("display","none")
     $("#map").css("display","block")
+    $("#review-form").css("display","block")
   }
 
   $("#login-link").on("click", function(){
     $("#map").css("display","none")
+    $("#review-form").css("display","none")
     $("#login-form").css("display","block")
     $("#display").css("background", "grey")
   })
@@ -359,7 +367,6 @@ $(document).ready(function () {
         convertLocation(address)
         $("#address-input").val("")
         addModal.css("display", "none")
-        db.collection("locations").doc(address).set({})
     })
 
       $("#cancel-new-loc-btn").on("click", function () {
@@ -393,6 +400,8 @@ $("#map-button").on("click", function hide() {
   $("#roomlog").hide()
   $("#readingMat").hide()
   $("#map").show()
+  $("#display").show()
+  $("#review-form").show()
 });
 
 
@@ -401,13 +410,14 @@ $("#reading-button").on("click", function hide() {
   $("#roomlog").hide()
   $("#readingMat").show()
   $("#display").hide()
-
+  $("#review-form").css("display","none")
 });
 
 $("#room-log").on("click", function hide() {
   $("#map").hide()
   $("#readingMat").hide()
   $("#roomlog").show()
+  $("#review-form").css("display","block")
 });
 
 
