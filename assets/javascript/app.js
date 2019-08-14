@@ -390,7 +390,7 @@ firebase.auth().onAuthStateChanged(function(firebaseUser){
 
 //On Click functions for Navbar. Each one hides whats not on the page and shows what is supposed to be on the specific page. 
 $("#map-button").on("click", function hide() {
-  $("#roomlog").hide()
+  $("#display").show()
   $("#readingMat").hide()
   $("#map").show()
 });
@@ -398,19 +398,9 @@ $("#map-button").on("click", function hide() {
 
 $("#reading-button").on("click", function hide() {
   $("#map").hide()
-  $("#roomlog").hide()
   $("#readingMat").show()
   $("#display").hide()
-
 });
-
-$("#room-log").on("click", function hide() {
-  $("#map").hide()
-  $("#readingMat").hide()
-  $("#roomlog").show()
-});
-
-
 
 
 

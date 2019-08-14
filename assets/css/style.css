@@ -56,8 +56,8 @@
   padding-bottom: 10px;
 }
 
-#comment-title{
-  font-family: foobar;
+#comment-title {
+  font-family: adrip1 ;
   text-align: center;
   font-weight: bold;
 }
@@ -244,13 +244,16 @@ nav ul li a{
 } */
 
 
-
+@font-face {
+  font-family: adrip1;
+  src: url(adrip1.ttf);
+}
 
 @font-face {
   font-family: foobar;
   src: url(FoobarProRegular.otf);
-
 } 
+
 
 
 #readingMat {
@@ -264,5 +267,7 @@ nav ul li a{
   border: 5px solid black;
   margin-right: 11%;
   background-color: beige;
- }
+ } 
+
+
 
