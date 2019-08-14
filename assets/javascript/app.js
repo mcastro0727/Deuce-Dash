@@ -36,11 +36,11 @@ function initMap() {
   myMap = map
 }
 
-firebase.auth().onAuthStateChanged(function(firebaseUser){
-  if(firebaseUser){
+firebase.auth().onAuthStateChanged(function (firebaseUser) {
+  if (firebaseUser) {
     console.log(firebaseUser)
   }
-  else{
+  else {
     console.log('not logged in')
   }
 })
@@ -48,7 +48,7 @@ firebase.auth().onAuthStateChanged(function(firebaseUser){
 $(document).ready(function () {
   $("#roomlog").hide();
   $("#readingMat").hide();
-}); 
+});
 
 $(document).ready(function () {
 
@@ -62,10 +62,16 @@ $(document).ready(function () {
 
   function addMarker(coordinates, address) {
     address = removePlus(address)
+    var emoji = 'assets/images/poop.png'
     var marker = new google.maps.Marker({
       position: coordinates,
       map: myMap,
-      title: address
+      title: address,
+      animation: google.maps.Animation.DROP,
+      icon: emoji
+
+      // animation: google.maps.Animation.DROP,
+      // icon: emoji,
     })
 
     marker.addListener('click', function () {
@@ -86,10 +92,10 @@ $(document).ready(function () {
 
 
       db.collection("reviews").where("address", "==", address.text()).orderBy("timeStamp").get()
-      .then(function(snapshot){
-        console.log(snapshot.docs)
+        .then(function (snapshot) {
+          console.log(snapshot.docs)
 
-        snapshot.docs.forEach(function(doc){
+          snapshot.docs.forEach(function (doc) {
             console.log(doc.data().address)
             var comment = $("<div class='comment'>")
             var email = $("<div class='user'>")
@@ -101,31 +107,31 @@ $(document).ready(function () {
             $("#review-comments").prepend(comment)
             $("#review-comments").prepend(email)
             $("#review-comments").prepend(timeDiv)
-            
 
+
+          })
         })
-      })
     })
   }
 
   function convertLocation(location) {
     location = addPlus(location)
     var queryURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + location + "&key=AIzaSyCkioyz1epNmUDEt2m_AnGPVYsD89b-E3g"
-    
+
     $.ajax({
       url: queryURL,
       method: "GET"
     })
-    .then(function (response) {
-      var lat = response.results[0].geometry.location.lat
-      var lng = response.results[0].geometry.location.lng
-      var coord = new google.maps.LatLng(lat, lng)
+      .then(function (response) {
+        var lat = response.results[0].geometry.location.lat
+        var lng = response.results[0].geometry.location.lng
+        var coord = new google.maps.LatLng(lat, lng)
 
-      database.ref().push({
-        lat: lat,
-        lng: lng,
-        address: location
-      })
+        database.ref().push({
+          lat: lat,
+          lng: lng,
+          address: location
+        })
 
       location = addPlus(location)
       addMarker(coord, location)
@@ -133,43 +139,44 @@ $(document).ready(function () {
   }
 
 
-  function register(){
+  function register() {
     email = $("#input-email").val()
     password = $("#input-password").val()
     var user = auth.currentUser
     var promise = auth.createUserWithEmailAndPassword(email, password)
     isLoggedIn = true
 
-    promise.catch(function(e){
+    promise.catch(function (e) {
       errorCode = e.code
       console.log(errorCode)
       isLoggedIn = false
     })
-    .then(function(){
+      .then(function () {
 
-      if(errorCode == "auth/invalid-email"){
-        $("#modal-title").text("Invalid email.")
-        $("#register-text").text("email address is not valid.")
-        $("sign-up-modal").css("display", "block")
-      }
+        if (errorCode == "auth/invalid-email") {
+          $("#modal-title").text("Invalid email.")
+          $("#register-text").text("email address is not valid.")
+          $("sign-up-modal").css("display", "block")
+        }
 
-      if(errorCode == "auth/invalid-password"){
-        $("#modal-title").text("Email address already registered.")
-        $("#register-text").text("You already have an account.")
-        $("sign-up-modal").css("display", "block")
-      }
+        if (errorCode == "auth/invalid-password") {
+          $("#modal-title").text("Email address already registered.")
+          $("#register-text").text("You already have an account.")
+          $("sign-up-modal").css("display", "block")
+        }
 
-      if(isLoggedIn){
+        if (isLoggedIn) {
 
-        db.collection("users").doc(user.uid).set({
-          email: email
-        })
-        .then(function() {
-            console.log("Document successfully written!");
-        })
-        .catch(function(error) {
-            console.error("Error writing document: ", error);
-        })
+          db.collection("users").doc(user.uid).set({
+            email: email
+          })
+            .then(function () {
+              console.log("Document successfully written!");
+            })
+            .catch(function (error) {
+              console.error("Error writing document: ", error);
+            })
+
 
         $("#log-in-link-text").text("Log-out")
         $("#input-email").val("")
@@ -208,13 +215,13 @@ $(document).ready(function () {
   }
 
   window.onclick = function (event) {
-    
+
     if (event.target == addModal) {
       modal.style.display = "none";
     }
   }
 
-  function logInSignUpBtnClick(){
+  function logInSignUpBtnClick() {
     $("#input-email").val("")
     $("#input-password").val("")
     $("#login-form").css("display","none")
@@ -228,74 +235,74 @@ $(document).ready(function () {
     $("#login-form").css("display","block")
     $("#display").css("background", "grey")
   })
-  
-  if(isLoggedIn){
+
+  if (isLoggedIn) {
     $("#log-in-link-text").text("Log-out")
   }
-  else{
+  else {
     $("#log-in-link-text").text("Log-in")
   }
 
-  $("#login-btn").on("click", function(){
+  $("#login-btn").on("click", function () {
     email = $("#input-email").val()
     password = $("#input-password").val()
 
     var promise = auth.signInWithEmailAndPassword(email, password)
     isLoggedIn = true
 
-    promise.catch(function(e){
+    promise.catch(function (e) {
       errorCode = e.code
       console.log(errorCode)
       isLoggedIn = false
     })
-    .then(function(){
+      .then(function () {
 
-      if(errorCode == "auth/wrong-password"){
-        $("#modal-title").text("Incorrect password.")
-        $("#register-text").text("")
+        if (errorCode == "auth/wrong-password") {
+          $("#modal-title").text("Incorrect password.")
+          $("#register-text").text("")
 
-        $("#reg-cancel-btn").on("click", function(){
-          signUpModal.css("display", "none")
-        })
+          $("#reg-cancel-btn").on("click", function () {
+            signUpModal.css("display", "none")
+          })
 
-        $("#reg-ok-btn").on("click", function(){
-          $("#sign-up-modal").css("display", "none")
-        })
-      }
+          $("#reg-ok-btn").on("click", function () {
+            $("#sign-up-modal").css("display", "none")
+          })
+        }
 
-      if(errorCode == "auth/user-not-found"){
-        $("#modal-title").text("Account not found.")
-        $("#register-text").text("Register account now?")
-        
-        $("#reg-cancel-btn").on("click", function(){
-          signUpModal.css("display", "none")
-          $("#input-email").val("")
-          $("#input-password").val("")
-        })
+        if (errorCode == "auth/user-not-found") {
+          $("#modal-title").text("Account not found.")
+          $("#register-text").text("Register account now?")
 
-        $("#reg-ok-btn").on("click", function(){
-          register()
-          $("#sign-up-modal").css("display", "none")
+          $("#reg-cancel-btn").on("click", function () {
+            signUpModal.css("display", "none")
+            $("#input-email").val("")
+            $("#input-password").val("")
+          })
+
+          $("#reg-ok-btn").on("click", function () {
+            register()
+            $("#sign-up-modal").css("display", "none")
+            $("#log-in-link-text").text("Log-out")
+          })
+        }
+
+        if (isLoggedIn) {
           $("#log-in-link-text").text("Log-out")
-        })
-      }
-
-      if(isLoggedIn){
-        $("#log-in-link-text").text("Log-out")
-        logInSignUpBtnClick()
-      }
-      else{
-        signUpModal.css("display", "block")
-      }
-    })
+          logInSignUpBtnClick()
+        }
+        else {
+          signUpModal.css("display", "block")
+        }
+      })
   })
 
 
-  $("#sign-up-btn").on("click", function(){
-      register()
+  $("#sign-up-btn").on("click", function () {
+    register()
   })
 
-  $("#new-comment-btn").on("click", function(){
+  $("#new-comment-btn").on("click", function () {
     var commentDiv = $("<div class='comment'>")
     var userDiv = $("<div class='user'>")
     var timeDateDiv = $("<div class='time'>")
@@ -306,28 +313,28 @@ $(document).ready(function () {
     var month = today.getMonth()
     var day = today.getDate()
     var timeStampHour = hours
-    
-    if(hours < 10){
+
+    if (hours < 10) {
       timeStamphour = "0" + hours
     }
 
-    if(day < 10){
+    if (day < 10) {
       day = "0" + day
     }
 
-    if(month < 10){
+    if (month < 10) {
       month = "0" + month
     }
 
-    if(today.getMinutes() < 10){
+    if (today.getMinutes() < 10) {
       mins = "0" + mins
     }
 
-    if(today.getHours() > 12){
+    if (today.getHours() > 12) {
       hours = hours - 12
       amPM = "PM"
     }
-    else if(today.getHours() == 0){
+    else if (today.getHours() == 0) {
       hours = 12
     }
 
@@ -352,18 +359,18 @@ $(document).ready(function () {
       timeStamp: timeStamp
     })
 
-     $("#comment-box").val("")
-     $("#comment-box").focus()
+    $("#comment-box").val("")
+    $("#comment-box").focus()
   })
 
   $("#add-new-loc-link").on("click", function () {
-    
-    if(isLoggedIn){
+
+    if (isLoggedIn) {
       addModal.css("display", "block")
       $("#address-input").focus()
 
       $("#submit-new-loc-btn").on("click", function () {
-        var address=capitalizeWords($("#address-input").val())
+        var address = capitalizeWords($("#address-input").val())
         convertLocation(address)
         $("#address-input").val("")
         addModal.css("display", "none")
@@ -386,11 +393,11 @@ $(document).ready(function () {
 
 })
 
-firebase.auth().onAuthStateChanged(function(firebaseUser){
-  if(firebaseUser){
+firebase.auth().onAuthStateChanged(function (firebaseUser) {
+  if (firebaseUser) {
     console.log(firebaseUser)
   }
-  else{
+  else {
     console.log('not logged in')
   }
 });
@@ -427,25 +434,25 @@ $("#room-log").on("click", function hide() {
 var queryURL = "https://api.nytimes.com/svc/topstories/v2/science.json?api-key=wsP6DVbJDjNI1mKZBsqxLGKeDAxfIOtp"
 
 
-  $.ajax({
-      url: queryURL,
-      method: "GET"
-  }).done(function(response) {
+$.ajax({
+  url: queryURL,
+  method: "GET"
+}).done(function (response) {
 
-    console.log(response);
+  console.log(response);
 
-    
-      $("#articlesHere").append(response.results["0"].title + "<br>" +"<a href='"  + response.results["0"].url + "' target='_blank'>" + response.results["0"].url + "</a>" + "<br>")
 
-      $("#articlesHere").append(response.results["1"].title + "<br>" +"<a href='"  + response.results["1"].url + "' target='_blank'>" + response.results["1"].url + "</a>" + "<br>")
+  $("#articlesHere").append(response.results["0"].title + "<br>" + "<a href='" + response.results["0"].url + "' target='_blank'>" + response.results["0"].url + "</a>" + "<br>")
 
-      $("#articlesHere").append(response.results["2"].title + "<br>" +"<a href='"  + response.results["2"].url + "' target='_blank'>" + response.results["2"].url + "</a>" + "<br>")
+  $("#articlesHere").append(response.results["1"].title + "<br>" + "<a href='" + response.results["1"].url + "' target='_blank'>" + response.results["1"].url + "</a>" + "<br>")
 
-      $("#articlesHere").append(response.results["3"].title + "<br>" +"<a href='"  + response.results["3"].url + "' target='_blank'>" + response.results["3"].url + "</a>" + "<br>")
+  $("#articlesHere").append(response.results["2"].title + "<br>" + "<a href='" + response.results["2"].url + "' target='_blank'>" + response.results["2"].url + "</a>" + "<br>")
 
-      $("#articlesHere").append(response.results["4"].title + "<br>" +"<a href='"  + response.results["4"].url + "' target='_blank'>" + response.results["4"].url + "</a>" + "<br>")
+  $("#articlesHere").append(response.results["3"].title + "<br>" + "<a href='" + response.results["3"].url + "' target='_blank'>" + response.results["3"].url + "</a>" + "<br>")
 
-      $("#articlesHere").append(response.results["5"].title + "<br>" +"<a href='"  + response.results["5"].url + "' target='_blank'>" + response.results["5"].url + "</a>" + "<br>")
+  $("#articlesHere").append(response.results["4"].title + "<br>" + "<a href='" + response.results["4"].url + "' target='_blank'>" + response.results["4"].url + "</a>" + "<br>")
 
-  });
- 
+  $("#articlesHere").append(response.results["5"].title + "<br>" + "<a href='" + response.results["5"].url + "' target='_blank'>" + response.results["5"].url + "</a>" + "<br>")
+
+});
+
