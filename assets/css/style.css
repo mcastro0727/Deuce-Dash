@@ -17,11 +17,12 @@
 
 #form-border{
   margin: 20% 5% 0 5%;
-  display: none;
+  /* display: none; */
 }
 
 #map{
   height: 100%;
+  display: none;
 }
 
 /* #login-form{
@@ -139,6 +140,7 @@ nav{
 }
 
 #review-form{
+  display: none;
   position: fixed;
   z-index: 1000;
   top: 176.859px;
@@ -254,15 +256,14 @@ nav ul li a{
 
 
 #readingMat {
-  position: absolute;
-  text-align: center;
-  top: 176.859px;
-  left: 23%;
-  bottom: 0;
-  width: 75%;
-  height: 80%;
-  border: 5px solid black;
-  margin-right: 11%;
-  background-color: beige;
- } 
-
+ position: absolute;
+ text-align: center;
+ top: 176.859px;
+ left: 23%;
+ bottom: 0;
+ width: 75%;
+ height: 80%;
+ border: 5px solid black;
+ margin-right: 11%;
+ background-color: beige;
+}
