@@ -133,6 +133,9 @@ html, body {
 body{
   font-family: Open Sans, Arial, sans-serif;
   overflow-x: hidden;
+  background-image: url("../images/city bg.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 
 nav{
