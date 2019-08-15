@@ -78,8 +78,8 @@ $(document).ready(function () {
       var address = $("#comment-header")
       var comments = $("#comment-box")
       var reviews = $("#review-comments")
-      document.getElementById("comment-box").disabled=false
-      document.getElementById("new-comment-btn").disabled=false
+      document.getElementById("comment-box").disabled = false
+      document.getElementById("new-comment-btn").disabled = false
 
       $("#comment-box").focus()
       address.empty()
@@ -133,9 +133,9 @@ $(document).ready(function () {
           address: location
         })
 
-      location = addPlus(location)
-      addMarker(coord, location)
-    })
+        location = addPlus(location)
+        addMarker(coord, location)
+      })
   }
 
 
@@ -178,18 +178,18 @@ $(document).ready(function () {
             })
 
 
-        $("#log-in-link-text").text("Log-out")
-        $("#input-email").val("")
-        $("#input-password").val("")
-        $("#login-form").css("display","none")
-        $("#map").css("display","block")
-        $("#review-form").css("display","block")
-      }
-    })
+          $("#log-in-link-text").text("Log-out")
+          $("#input-email").val("")
+          $("#input-password").val("")
+          $("#login-form").css("display", "none")
+          $("#map").css("display", "block")
+          $("#review-form").css("display", "block")
+        }
+      })
   }
 
   function addPlus(string) {
-    
+
     var stringArray = string.split("+")
     var stringPlus = stringArray[0]
 
@@ -200,7 +200,7 @@ $(document).ready(function () {
   }
 
   function removePlus(string) {
-    
+
     var stringArray = string.split("+")
     var stringMinus = stringArray[0]
 
@@ -209,9 +209,9 @@ $(document).ready(function () {
     }
     return (stringMinus)
   }
-  
-  function capitalizeWords(str){
-    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+
+  function capitalizeWords(str) {
+    return str.replace(/\w\S*/g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
   }
 
   window.onclick = function (event) {
@@ -224,15 +224,15 @@ $(document).ready(function () {
   function logInSignUpBtnClick() {
     $("#input-email").val("")
     $("#input-password").val("")
-    $("#login-form").css("display","none")
-    $("#map").css("display","block")
-    $("#review-form").css("display","block")
+    $("#login-form").css("display", "none")
+    $("#map").css("display", "block")
+    $("#review-form").css("display", "block")
   }
 
-  $("#login-link").on("click", function(){
-    $("#map").css("display","none")
-    $("#review-form").css("display","none")
-    $("#login-form").css("display","block")
+  $("#login-link").on("click", function () {
+    $("#map").css("display", "none")
+    $("#review-form").css("display", "none")
+    $("#login-form").css("display", "block")
     $("#display").css("background", "grey")
   })
 
@@ -374,7 +374,7 @@ $(document).ready(function () {
         convertLocation(address)
         $("#address-input").val("")
         addModal.css("display", "none")
-    })
+      })
 
       $("#cancel-new-loc-btn").on("click", function () {
         $("#address-input").val("")
@@ -386,11 +386,6 @@ $(document).ready(function () {
   $(".new-location-btn").on("click", function () {
     addModal.fadeOut(200)
   })
-
-  convertLocation("168-02 P.O Edward Byrne Ave.")
-  convertLocation("64-2 Catalpa Avenue")
-  convertLocation("92-08 222nd Street")
-
 })
 
 firebase.auth().onAuthStateChanged(function (firebaseUser) {
@@ -417,14 +412,14 @@ $("#reading-button").on("click", function hide() {
   $("#roomlog").hide()
   $("#readingMat").show()
   $("#display").hide()
-  $("#review-form").css("display","none")
+  $("#review-form").css("display", "none")
 });
 
 $("#room-log").on("click", function hide() {
   $("#map").hide()
   $("#readingMat").hide()
   $("#roomlog").show()
-  $("#review-form").css("display","block")
+  $("#review-form").css("display", "block")
 });
 
 
