@@ -387,10 +387,6 @@ $(document).ready(function () {
     addModal.fadeOut(200)
   })
 
-  convertLocation("168-02 P.O Edward Byrne Ave.")
-  convertLocation("64-2 Catalpa Avenue")
-  convertLocation("92-08 222nd Street")
-
 })
 
 firebase.auth().onAuthStateChanged(function (firebaseUser) {
@@ -416,8 +412,6 @@ $("#reading-button").on("click", function hide() {
   $("#map").hide()
   $("#readingMat").show()
   $("#display").hide()
-<<<<<<< HEAD
-=======
   $("#review-form").css("display","none")
 });
 
@@ -426,7 +420,6 @@ $("#room-log").on("click", function hide() {
   $("#readingMat").hide()
   $("#roomlog").show()
   $("#review-form").css("display","block")
->>>>>>> e4e7b2a92690cbc60270b5a2b88e5bb95820db9c
 });
 
 
