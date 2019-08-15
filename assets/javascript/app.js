@@ -387,9 +387,7 @@ $(document).ready(function () {
     addModal.fadeOut(200)
   })
 
-  convertLocation("168-02 P.O Edward Byrne Ave.")
-  convertLocation("64-2 Catalpa Avenue")
-  convertLocation("92-08 222nd Street")
+  
 
 })
 
