@@ -42,7 +42,7 @@
 }
 
 #overline{
-  border-top: 2px solid lightgreen;
+  border-top: 2px solid #2b80b7;
   padding-top: 5px;
 }
 
@@ -53,8 +53,9 @@
 #nav-title{
   text-align: center;
   color: white;
-  border-bottom: 2px solid lightgreen;
-  padding-bottom: 10px;
+  border-bottom: 2px solid #2b80b7;
+  padding-bottom: 11px;
+  padding-top:11px;
 }
 
 #comment-title {
@@ -66,7 +67,7 @@
 
 #comment-header{
   text-align: center;
-  color: lightgreen;
+  color: #2b80b7;
 }
 
 #address-input{
@@ -74,7 +75,7 @@
 }
 
 .time{
-  color: lightgreen;
+  color: #2b80b7;
   margin-left:2px;
 }
 
@@ -136,24 +137,21 @@ body{
 
 nav{
   position: fixed;
-  z-index: 1000;
-  top: 176.859px;
-  bottom: 0;
+  top: 181px;
   width: 200px;
   background-color: black;
+  height: 900px;
 }
 
 #review-form{
-  display: none;
   position: fixed;
   z-index: 1000;
-  top: 176.859px;
-  bottom: 0;
   width: 200px;
   left:200px;
   background-color: grey;
   overflow: auto;
   margin: 0;
+  height: 900px;
 }
 
 nav ul{
@@ -163,7 +161,7 @@ nav ul{
 }
 
 nav a:hover{
-  background: lightgreen;
+  background: #2b80b7;
   text-decoration: none;
   color: black
 }
