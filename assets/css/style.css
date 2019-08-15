@@ -61,6 +61,7 @@
   font-family: 'UniWideRegular'; 
   font-weight: normal; 
   font-style: normal;
+  text-align: center;
 }
 
 #comment-header{
@@ -94,6 +95,7 @@
   background: #2B80B7;
   font-weight: bold;
   margin-bottom: 10px;
+  font-family: 'UniWideRegular';
 
 }
 
@@ -245,11 +247,6 @@ nav ul li a{
   cursor: pointer;
 } */
 
-
-@font-face {
-  font-family: adrip1;
-  src: url(adrip1.ttf);
-}
 
 @font-face {
   font-family: foobar;
