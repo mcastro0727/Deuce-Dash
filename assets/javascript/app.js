@@ -387,10 +387,6 @@ $(document).ready(function () {
     addModal.fadeOut(200)
   })
 
-  convertLocation("168-02 P.O Edward Byrne Ave.")
-  convertLocation("64-2 Catalpa Avenue")
-  convertLocation("92-08 222nd Street")
-
 })
 
 firebase.auth().onAuthStateChanged(function (firebaseUser) {
@@ -404,7 +400,7 @@ firebase.auth().onAuthStateChanged(function (firebaseUser) {
 
 //On Click functions for Navbar. Each one hides whats not on the page and shows what is supposed to be on the specific page. 
 $("#map-button").on("click", function hide() {
-  $("#roomlog").hide()
+  $("#display").show()
   $("#readingMat").hide()
   $("#map").show()
   $("#display").show()
@@ -414,7 +410,6 @@ $("#map-button").on("click", function hide() {
 
 $("#reading-button").on("click", function hide() {
   $("#map").hide()
-  $("#roomlog").hide()
   $("#readingMat").show()
   $("#display").hide()
   $("#review-form").css("display","none")
@@ -426,8 +421,6 @@ $("#room-log").on("click", function hide() {
   $("#roomlog").show()
   $("#review-form").css("display","block")
 });
-
-
 
 
 

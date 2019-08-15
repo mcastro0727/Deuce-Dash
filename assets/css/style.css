@@ -57,10 +57,10 @@
   padding-bottom: 10px;
 }
 
-#comment-title{
-  font-family: foobar;
-  text-align: center;
-  font-weight: bold;
+#comment-title {
+  font-family: 'UniWideRegular'; 
+  font-weight: normal; 
+  font-style: normal;
 }
 
 #comment-header{
@@ -246,24 +246,30 @@ nav ul li a{
 } */
 
 
-
+@font-face {
+  font-family: adrip1;
+  src: url(adrip1.ttf);
+}
 
 @font-face {
   font-family: foobar;
   src: url(FoobarProRegular.otf);
-
 } 
 
 
+
 #readingMat {
- position: absolute;
- text-align: center;
- top: 176.859px;
- left: 23%;
- bottom: 0;
- width: 75%;
- height: 80%;
- border: 5px solid black;
- margin-right: 11%;
- background-color: beige;
-}
+  position: absolute;
+  text-align: center;
+  top: 176.859px;
+  left: 23%;
+  bottom: 0;
+  width: 75%;
+  height: 80%;
+  border: 5px solid black;
+  margin-right: 11%;
+  background-color: beige;
+ } 
+
+
+
